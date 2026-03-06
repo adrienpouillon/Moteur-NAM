@@ -9,6 +9,7 @@ namespace nam
 	uint8_t Input::ms_keys[INPUT_AMOUNT] = { 0 };
 	XMFLOAT2 Input::ms_lastMousePosition = { 0,0 };
 	XMFLOAT2 Input::ms_mouseDelta{ 0,0 };
+	bool Input::m_isMouseVisible = true;
 
 	void Input::Reset()
 	{
@@ -117,11 +118,20 @@ namespace nam
 
 	void Input::HideMouse()
 	{
+		m_isMouseVisible = false;
+
 		while (ShowCursor(FALSE) >= 0) {}
 	}
 
 	void Input::ShowMouse()
 	{
+		m_isMouseVisible = true;
+
 		while (ShowCursor(TRUE) < 0) {}
+	}
+
+	const bool Input::IsMouseVisible()
+	{
+		return m_isMouseVisible;
 	}
 }

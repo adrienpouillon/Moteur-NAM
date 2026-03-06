@@ -23,8 +23,6 @@ namespace nam
 
 	void Mesh::ComputeNormals(bool smoothShading)
 	{
-		m_dirty = true;
-
 		for (size_t i = 0; i < m_indices.size(); i += 3)
 		{
 			u32 i0 = m_indices[i];
@@ -724,7 +722,13 @@ namespace nam
 		m_vertices.clear();
 		m_indices.clear();
 
-		float halfSize = grid.voxelSize * 0.5f;
+		float halfVoxel = 0.5f * grid.voxelSize;
+
+		float gridWidth = grid.width * grid.voxelSize;
+		float gridHeight = grid.height * grid.voxelSize;
+		float gridDepth = grid.depth * grid.voxelSize;
+
+		XMFLOAT3 gridCenter = { gridWidth * 0.5f - halfVoxel, gridHeight * 0.5f - halfVoxel, gridDepth * 0.5f - halfVoxel };
 
 		for (int z = 0; z < grid.depth; z++)
 		{
@@ -736,9 +740,9 @@ namespace nam
 						continue; 
 
 					XMFLOAT3 center(
-						x * grid.voxelSize,
-						y * grid.voxelSize,
-						z * grid.voxelSize
+						x * grid.voxelSize - gridCenter.x,
+						y * grid.voxelSize - gridCenter.y,
+						z * grid.voxelSize - gridCenter.z
 					);
 
 					bool faceLeft = (x == 0) || !grid.GetAt(x - 1, y, z);
@@ -748,12 +752,12 @@ namespace nam
 					bool faceBack = (z == 0) || !grid.GetAt(x, y, z - 1);
 					bool faceFront = (z == grid.depth - 1) || !grid.GetAt(x, y, z + 1);
 
-					if (faceLeft)   AddCubeFace(center, halfSize, CubeFace::Left, color);
-					if (faceRight)  AddCubeFace(center, halfSize, CubeFace::Right, color);
-					if (faceBottom) AddCubeFace(center, halfSize, CubeFace::Bottom, color);
-					if (faceTop)    AddCubeFace(center, halfSize, CubeFace::Top, color);
-					if (faceBack)   AddCubeFace(center, halfSize, CubeFace::Back, color);
-					if (faceFront)  AddCubeFace(center, halfSize, CubeFace::Front, color);
+					if (faceLeft)   AddCubeFace(center, halfVoxel, CubeFace::Left, color);
+					if (faceRight)  AddCubeFace(center, halfVoxel, CubeFace::Right, color);
+					if (faceBottom) AddCubeFace(center, halfVoxel, CubeFace::Bottom, color);
+					if (faceTop)    AddCubeFace(center, halfVoxel, CubeFace::Top, color);
+					if (faceBack)   AddCubeFace(center, halfVoxel, CubeFace::Back, color);
+					if (faceFront)  AddCubeFace(center, halfVoxel, CubeFace::Front, color);
 				}
 			}
 		}
@@ -763,52 +767,52 @@ namespace nam
 		ComputeNormals(true);
 	}
 
-	void Mesh::AddCubeFace(const XMFLOAT3& center, float halfSize, CubeFace face, const XMFLOAT4& color)
+	void Mesh::AddCubeFace(const XMFLOAT3& center, float halfVoxel, CubeFace face, const XMFLOAT4& color)
 	{
 		XMFLOAT3 corners[4];
 
 		switch (face)
 		{
 		case CubeFace::Front: 
-			corners[0] = { center.x - halfSize, center.y - halfSize, center.z + halfSize };
-			corners[1] = { center.x - halfSize, center.y + halfSize, center.z + halfSize };
-			corners[2] = { center.x + halfSize, center.y + halfSize, center.z + halfSize };
-			corners[3] = { center.x + halfSize, center.y - halfSize, center.z + halfSize };
+			corners[0] = { center.x - halfVoxel, center.y - halfVoxel, center.z + halfVoxel };
+			corners[1] = { center.x - halfVoxel, center.y + halfVoxel, center.z + halfVoxel };
+			corners[2] = { center.x + halfVoxel, center.y + halfVoxel, center.z + halfVoxel };
+			corners[3] = { center.x + halfVoxel, center.y - halfVoxel, center.z + halfVoxel };
 			break;
 
 		case CubeFace::Back: 
-			corners[0] = { center.x + halfSize, center.y - halfSize, center.z - halfSize };
-			corners[1] = { center.x + halfSize, center.y + halfSize, center.z - halfSize };
-			corners[2] = { center.x - halfSize, center.y + halfSize, center.z - halfSize };
-			corners[3] = { center.x - halfSize, center.y - halfSize, center.z - halfSize };
+			corners[0] = { center.x + halfVoxel, center.y - halfVoxel, center.z - halfVoxel };
+			corners[1] = { center.x + halfVoxel, center.y + halfVoxel, center.z - halfVoxel };
+			corners[2] = { center.x - halfVoxel, center.y + halfVoxel, center.z - halfVoxel };
+			corners[3] = { center.x - halfVoxel, center.y - halfVoxel, center.z - halfVoxel };
 			break;
 
 		case CubeFace::Left:
-			corners[0] = { center.x - halfSize, center.y - halfSize, center.z - halfSize };
-			corners[1] = { center.x - halfSize, center.y + halfSize, center.z - halfSize };
-			corners[2] = { center.x - halfSize, center.y + halfSize, center.z + halfSize };
-			corners[3] = { center.x - halfSize, center.y - halfSize, center.z + halfSize };
+			corners[0] = { center.x - halfVoxel, center.y - halfVoxel, center.z - halfVoxel };
+			corners[1] = { center.x - halfVoxel, center.y + halfVoxel, center.z - halfVoxel };
+			corners[2] = { center.x - halfVoxel, center.y + halfVoxel, center.z + halfVoxel };
+			corners[3] = { center.x - halfVoxel, center.y - halfVoxel, center.z + halfVoxel };
 			break;
 
 		case CubeFace::Right:
-			corners[0] = { center.x + halfSize, center.y - halfSize, center.z + halfSize };
-			corners[1] = { center.x + halfSize, center.y + halfSize, center.z + halfSize };
-			corners[2] = { center.x + halfSize, center.y + halfSize, center.z - halfSize };
-			corners[3] = { center.x + halfSize, center.y - halfSize, center.z - halfSize };
+			corners[0] = { center.x + halfVoxel, center.y - halfVoxel, center.z + halfVoxel };
+			corners[1] = { center.x + halfVoxel, center.y + halfVoxel, center.z + halfVoxel };
+			corners[2] = { center.x + halfVoxel, center.y + halfVoxel, center.z - halfVoxel };
+			corners[3] = { center.x + halfVoxel, center.y - halfVoxel, center.z - halfVoxel };
 			break;
 
 		case CubeFace::Top: 
-			corners[0] = { center.x - halfSize, center.y + halfSize, center.z + halfSize };
-			corners[1] = { center.x - halfSize, center.y + halfSize, center.z - halfSize };
-			corners[2] = { center.x + halfSize, center.y + halfSize, center.z - halfSize };
-			corners[3] = { center.x + halfSize, center.y + halfSize, center.z + halfSize };
+			corners[0] = { center.x - halfVoxel, center.y + halfVoxel, center.z + halfVoxel };
+			corners[1] = { center.x - halfVoxel, center.y + halfVoxel, center.z - halfVoxel };
+			corners[2] = { center.x + halfVoxel, center.y + halfVoxel, center.z - halfVoxel };
+			corners[3] = { center.x + halfVoxel, center.y + halfVoxel, center.z + halfVoxel };
 			break;
 
 		case CubeFace::Bottom: 
-			corners[0] = { center.x - halfSize, center.y - halfSize, center.z - halfSize };
-			corners[1] = { center.x - halfSize, center.y - halfSize, center.z + halfSize };
-			corners[2] = { center.x + halfSize, center.y - halfSize, center.z + halfSize };
-			corners[3] = { center.x + halfSize, center.y - halfSize, center.z - halfSize };
+			corners[0] = { center.x - halfVoxel, center.y - halfVoxel, center.z - halfVoxel };
+			corners[1] = { center.x - halfVoxel, center.y - halfVoxel, center.z + halfVoxel };
+			corners[2] = { center.x + halfVoxel, center.y - halfVoxel, center.z + halfVoxel };
+			corners[3] = { center.x + halfVoxel, center.y - halfVoxel, center.z - halfVoxel };
 			break;
 		}
 
@@ -901,8 +905,12 @@ namespace nam
 					XMLoadFloat3(&displacementMap[hash])
 				)
 			);
+			XMFLOAT3 a = displacementMap[hash];
+			int b = 0;
 		}
 
+		UpdateMinMaxBounds();
+		UpdateCenterExtend();
 		ComputeNormals(true);
 	}
 
@@ -980,6 +988,30 @@ namespace nam
 			if (pos.z < m_minBounds.z)
 				m_minBounds.z = pos.z;
 		}
+	}
+
+	void Mesh::CopyDataTo(Mesh* p_target)
+	{
+		p_target->m_vertices = m_vertices;
+		p_target->m_indices = m_indices;
+		p_target->m_color = m_color;
+		p_target->m_useTexture = m_useTexture;
+		p_target->m_textureTag = m_textureTag;
+
+		p_target->UpdateMinMaxBounds();
+		p_target->UpdateCenterExtend();
+	}
+
+	void Mesh::CopyDataFrom(Mesh* p_source)
+	{
+		m_vertices = p_source->m_vertices;
+		m_indices = p_source->m_indices;
+		m_color = p_source->m_color;
+		m_useTexture = p_source->m_useTexture;
+		m_textureTag = p_source->m_textureTag;
+
+		UpdateMinMaxBounds();
+		UpdateCenterExtend();
 	}
 
 	void Mesh::UpdateCenterExtend()

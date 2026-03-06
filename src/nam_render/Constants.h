@@ -4,7 +4,7 @@ constexpr int MAX_CBUFFERS = 2;
 
 constexpr int MAX_RENDER_ITEMS = 2048;
 //Minus some because of the default Textures like Splash screen
-constexpr int MAX_TEXTURES = 128;
+constexpr int MAX_TEXTURES = 512;
 constexpr int MAX_LIGHTS = 64;
 
 constexpr int PARTICLE_UAV_SLOT = MAX_TEXTURES;

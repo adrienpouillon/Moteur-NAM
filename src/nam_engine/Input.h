@@ -18,6 +18,7 @@ namespace nam
 		static DirectX::XMFLOAT2 ms_lastMousePosition;
 		static DirectX::XMFLOAT2 ms_mouseDelta;
 
+		static bool m_isMouseVisible;
 	public:
 		static void Reset();
 
@@ -34,6 +35,7 @@ namespace nam
 		static DirectX::XMFLOAT2 GetMouseDelta();
 		static void HideMouse();
 		static void ShowMouse();
+		static const bool IsMouseVisible();
 	};
 }
 

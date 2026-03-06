@@ -1,6 +1,5 @@
 #pragma once
 #include "RenderManager.h"
-#include "CommandManager.h" //TODO remove
 
 namespace nam
 {

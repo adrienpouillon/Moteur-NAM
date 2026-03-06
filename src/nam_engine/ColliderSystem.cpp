@@ -350,19 +350,7 @@ namespace nam
                     XMStoreFloat3(&physic2.m_velocity, vel2);
                 }
             }
-            else
-            {
-                XMVECTOR halfSep = XMVectorMultiply(normal, XMVectorReplicate(depth * 0.5f));
-
-                XMVECTOR currentPos1 = XMLoadFloat3(&currentPosition1);
-                XMVECTOR currentPos2 = XMLoadFloat3(&currentPosition2);
-
-                XMStoreFloat3(&newPos1, XMVectorSubtract(currentPos1, halfSep));
-                XMStoreFloat3(&newPos2, XMVectorAdd(currentPos2, halfSep));
-
-                transform1->SetWorldPosition(newPos1);
-                transform2->SetWorldPosition(newPos2);
-            }
+            // No repulse if both no physics
         }
 	}
 

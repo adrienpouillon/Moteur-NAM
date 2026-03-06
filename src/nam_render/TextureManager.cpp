@@ -77,6 +77,11 @@ namespace nam
 
 	void TextureManager::CreateTexture(std::wstring path, size uniqueTag, bool usingTextureFolder)
 	{
+		auto it = m_textures.find(uniqueTag);
+
+		if (it != m_textures.end())
+			return;
+
 		Texture* p_texture = new Texture();
 		p_texture->m_heapOffset = uniqueTag;
 

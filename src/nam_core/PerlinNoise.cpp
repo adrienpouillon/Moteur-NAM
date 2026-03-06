@@ -58,7 +58,7 @@ namespace nam
 	{
 		for (int i = 0; i < 256; i++)
 		{
-			ms_permutaions[i] = i;
+			ms_permutaions[i] = (int)i;
 		}
 
 		std::shuffle(&ms_permutaions[0], &ms_permutaions[255], Rng::GetGen());

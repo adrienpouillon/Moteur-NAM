@@ -14,8 +14,14 @@ namespace nam
 		m_drawLayer = drawLayer;
 	}
 
-	void Sprite::BuildRect(XMFLOAT2 size, XMFLOAT4 color, XMFLOAT2 offset, float roll)
+	void Sprite::BuildRect(XMFLOAT2 size, XMFLOAT4 color, bool erase, XMFLOAT2 offset, float roll)
 	{
+		if (erase)
+		{
+			m_vertices.clear();
+			m_indices.clear();
+		}
+
 		m_color = color;
 
 		Vector<Vertex> vertices;
@@ -37,7 +43,7 @@ namespace nam
 			2, 3, 0
 		};
     
-    m_size = size;
+		m_size = size;
 
 		AddToGlobalMesh(vertices, indices, { offset.x, offset.y, 0 }, { 0, 0, roll });
 	}

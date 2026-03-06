@@ -19,7 +19,8 @@ namespace nam
 		//Layer N is in front of Layer (N + 1)
 		void SetDrawLayer(int drawLayer);
 
-		void BuildRect(DirectX::XMFLOAT2 size, DirectX::XMFLOAT4 color, DirectX::XMFLOAT2 offset = { 0, 0 }, float roll = 0);
+		//If erase == true, the vertices and indices will be cleared before
+		void BuildRect(DirectX::XMFLOAT2 size, DirectX::XMFLOAT4 color, bool erase = false, DirectX::XMFLOAT2 offset = { 0, 0 }, float roll = 0);
 		void BuildCircle(float radius, int stacks, DirectX::XMFLOAT4 color, DirectX::XMFLOAT2 offset = { 0, 0 });
 	};
 }

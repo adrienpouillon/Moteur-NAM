@@ -16,7 +16,7 @@ namespace nam
 		Timer() = default;
 		Timer(float targetTime, bool countdownMode = false, bool isPaused = false);
 
-		void Init(float targetTime, bool applyTimeWarp = true, bool countdownMode = false, bool isPaused = false);
+		void Init(float targetTime, bool countdownMode = false, bool isPaused = false);
 		void Update(float dt);
 
 		void Pause();

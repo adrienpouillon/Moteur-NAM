@@ -25,8 +25,8 @@ namespace nam
 		DirectX::XMFLOAT3 pos = { windowSize.x * 0.5f, windowSize.y * 0.5f, 0 };
 		SetWorldPosition(pos);
 
-		m_waitingTimer.Init(0.1f, false);
-		m_fadingTimer.Init(m_fadingSpeed, false);
+		m_waitingTimer.Init(0.1f);
+		m_fadingTimer.Init(m_fadingSpeed);
 
 		SetBehavior();
 	}

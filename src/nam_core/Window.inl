@@ -12,7 +12,7 @@ namespace nam
 
 		WNDCLASS wc = {};
 		wc.style = CS_HREDRAW | CS_VREDRAW;
-		wc.lpfnWndProc = func; //TODO App Method
+		wc.lpfnWndProc = func; 
 		wc.cbClsExtra = 0;
 		wc.cbWndExtra = 0;
 		wc.hInstance = m_hInstance;

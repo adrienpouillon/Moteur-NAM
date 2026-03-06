@@ -15,7 +15,7 @@ namespace nam
         VoxelGrid(int w = 1, int h = 1, int d = 1, float size = 1.f);
         void Init(int w, int h, int d, float size);
 
-        bool GetAt(int x, int y, int z);
+        bool GetAt(int x, int y, int z) const;
         void SetAt(int x, int y, int z, bool val);
 
         void MakeHole(DirectX::XMFLOAT3 from, DirectX::XMFLOAT3 to, float radius);

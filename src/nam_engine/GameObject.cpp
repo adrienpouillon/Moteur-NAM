@@ -10,6 +10,7 @@ namespace nam
 		mp_scene = nullptr;
 		m_entity = Entity();
 		m_tag = -1;
+		mp_transform = nullptr;
 		m_canDeleteMesh = false;
 	}
 
@@ -330,6 +331,7 @@ namespace nam
 			meshRenderer.SetMeshInstance(&mesh);
 		}
 	}
+  
 	void GameObject::SetMesh(Mesh* mesh)
 	{
 		if (HasComponent<MeshRendererComponent>() == false)

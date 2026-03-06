@@ -5,9 +5,14 @@
 class Enemy : public GameObject
 {
 private:
-	bool m_valide;
-	StateMachineComponent* m_stateMachine;
-	int m_life;
+	Score* m_score = nullptr;
+	int m_life = -1;
+	float m_speed = 0.f;
+
+	Timer m_afkTimer = {};
+	Timer m_lifeSpan = {};
+
+	GameObject* mp_target = nullptr;
 public:
 	Enemy();
 
@@ -17,41 +22,16 @@ public:
 	void OnCollision(u32 self, u32 other, const CollisionInfo& collisionInfo) override;
 	void OnDestroy() override;
 
-	template<typename T>
-	void CreateStateMachine(StateMachineComponent* sM, T* owner);
+	void SetScore(Score* score);
+	void IncreaseGameScore(int add);
+	Score* GetScore();
 
+	void SetTarget(GameObject* p_target);
+	
 	void SetLife(int life);
 	int GetLife();
 
-};
-
-enum stateEnemy
-{
-	_Idle,
-	_Run,
-	_Attack,
-	_CountStateEnemy
-};
-
-class ActionIdle : public Action
-{
-	void OnStart(GameObject* pOwner) {};
-	void OnUpdate(GameObject* pOwner) {};
-	void OnEnd(GameObject* pOwner) {};
-};
-
-class ActionRun : public Action
-{
-	void OnStart(GameObject* pOwner) {};
-	void OnUpdate(GameObject* pOwner) {};
-	void OnEnd(GameObject* pOwner) {};
-};
-
-class ActionAttack : public Action
-{
-	void OnStart(GameObject* pOwner) {};
-	void OnUpdate(GameObject* pOwner) {};
-	void OnEnd(GameObject* pOwner) {};
+	void RemoveHP(int amount);
 };
 
 #include "Enemy.inl"

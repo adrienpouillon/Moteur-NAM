@@ -14,6 +14,7 @@ namespace nam
 	{
 		static Queue<u32> m_freeIDs;
 		UnMap<u32, ARenderItem*> m_renderItems = {};
+		UnMap<size, ARenderItem*> m_taggedRenderItems = {};
 
 	public:
 		RenderItemManager();
@@ -28,7 +29,10 @@ namespace nam
 		template<typename T>
 		bool RemoveRenderItem(T*& p_item);
 
+		void SetRenderItemTag(ARenderItem* renderItem, size tag);
+
 		ARenderItem* GetRenderItem(u32 itemID);
+		ARenderItem* GetRenderItemOfTag(size tag);
 	};
 }
 

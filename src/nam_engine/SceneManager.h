@@ -11,7 +11,11 @@ namespace nam
 	private:
 		Ecs* mp_ecs;
 		UnMap<u32, Scene*> m_allCurrentScene;
+		UnMap<size, Scene*> m_allCurrentScenesByTag;
+
 		UnMap<u32, Scene*> m_allScene;
+		UnMap<size, Scene*> m_allSceneByTag;
+
 		UnMap<u32, GameObject*> m_allGameObjectInAllScene;
 		uint32_t m_idNext;
 	public:
@@ -27,12 +31,17 @@ namespace nam
 
 		void AddCurrentScene(Scene* scene);
 		void AddCurrentScene(u32 idScene);
+		void AddCurrentScene(size sceneTag);
+
 		void RemoveCurrentScene(Scene* scene);
 		void RemoveCurrentScene(u32 idScene);
+		void RemoveCurrentScene(size sceneTag);
+
 		void SwitchCurrentScene(Scene* sceneClose, Scene* sceneOpen);
 		void SwitchCurrentScene(u32 idSceneClose, u32 idSceneOpen);
+		void SwitchCurrentScene(size sceneTag1, size sceneTag2);
 
-		Scene* CreateScene();
+		Scene* CreateScene(size sceneTag);
 		void DestroyScene(Scene* scene);
 
 	private:
@@ -48,6 +57,7 @@ namespace nam
 
 	public:
 
+		Scene* GetSceneByTag(size sceneTag);
 		Scene* GetScene(u32 idScene);
 		GameObject* GetGameObjectInGame(Entity& entity);
 		GameObject* GetGameObjectInGame(u32 idEntity);
@@ -56,10 +66,10 @@ namespace nam
 
 		const UnMap<u32, GameObject*>& GetAllGameObjectInAllScene() const;
 
-		const UnMap<u32, Scene*>& GetCurrenteScene() const;
+		const UnMap<u32, Scene*>& GetCurrentScenes() const;
+		const UnMap<size, Scene*>& GetCurrentScenesByTag() const;
 
 		void SetEcs(Ecs* ecs);
-		//Ecs* GetEcs();
 
 		~SceneManager();
 

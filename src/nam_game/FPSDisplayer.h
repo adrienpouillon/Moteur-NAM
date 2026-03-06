@@ -2,8 +2,12 @@
 
 class FPSDisplayer : public GameObject
 {
-	Timer m_refreshTimer = {};
+private:
+	Timer m_refreshTimer;
+	TextRendererComponent* mp_textRender;
 public:
+	FPSDisplayer();
+
 	void OnInit() override;
 	void OnStart() override;
 	void OnUpdate() override;

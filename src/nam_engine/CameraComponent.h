@@ -13,7 +13,7 @@ namespace nam
 
 		DirectX::XMFLOAT4X4 m_proj = MathHelper::Identity4x4();
 
-		CameraComponent(float fovY = DirectX::XM_PIDIV4, float nearPlane = 0.01f, float farPlane = 100.f);
+		CameraComponent(float fovY = DirectX::XM_PIDIV4, float nearPlane = 0.01f, float farPlane = 200.f);
 		void UpdateAspectRatio(int clientWidth = -1, int clientHeight = -1);
 
 		void SetFov(float fovY);

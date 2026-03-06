@@ -2,7 +2,7 @@
 #include "ARenderItem.h"
 #include <BaseTypes.h>
 
-constexpr int MAX_CHARS = 64;
+constexpr int MAX_CHARS = 256;
 
 constexpr int VERTICES_PER_CHAR = 4;
 constexpr int INDICES_PER_CHAR = 6;
@@ -58,10 +58,10 @@ namespace nam
 		void SetDatas(DirectX::XMFLOAT2 characterSize, float kerning, DirectX::XMFLOAT4 textColor = {1, 1, 1, 1}, TextSheetDatas* p_datas = nullptr);
 
 		const DirectX::XMFLOAT2& GetCharacterSize() const;
+		const float& GetKerning() const;
 
 		void ChangeKerning(float kerning);
 		void SetCharacterSize(DirectX::XMFLOAT2 size);
-		void InitOffsets();
 
 	private:
 		void AddRect(DirectX::XMFLOAT4 color, char c);

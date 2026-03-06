@@ -13,6 +13,7 @@ namespace nam
 		Entity entity = mp_ecs->CreateEntity();
 
 		gameObject->Init(this, entity);
+		gameObject->SetActiveEntity(false);
 
 		int idEntity = entity.m_id;
 		m_allGameObject[idEntity] = gameObject;

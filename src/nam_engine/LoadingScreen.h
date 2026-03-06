@@ -12,7 +12,7 @@ namespace nam
 
 		Timer m_waitingTimer = {};
 		Timer m_fadingTimer = {};
-		float m_fadingSpeed = 1.5f;
+		float m_fadingSpeed = 1.f;
 
 	public:
 		void OnInit() override;

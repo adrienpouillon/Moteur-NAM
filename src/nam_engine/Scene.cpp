@@ -37,7 +37,6 @@ namespace nam
 		{
 			it->second->Start();
 		}
-		SetActiveAllEntity(true);
 	}
 
 	void Scene::CleanUpdate()
@@ -63,7 +62,7 @@ namespace nam
 		m_allEntityActiveFalse.clear();
 	}
 
-	void Scene::Reset()
+	void Scene::ResetScene()
 	{
 		Destroy();
 		Init();
@@ -94,16 +93,16 @@ namespace nam
 		}
 	}
 
-//protected
-
 	void Scene::SetActiveAllEntity(bool active)
 	{
 		for (auto it = m_allGameObject.begin(); it != m_allGameObject.end(); it++)
 		{
 			GameObject* gameObject = it->second;
-			mp_ecs->SetEntityActive(*gameObject->GetEntity() , active);
+			mp_ecs->SetEntityActive(*gameObject->GetEntity(), active);
 		}
 	}
+
+//protected
 
 	void Scene::DestroyEntity(Entity& entity)
 	{
@@ -190,6 +189,11 @@ namespace nam
 	bool Scene::GetIsActive() const
 	{
 		return m_isActive;
+	}
+
+	const size& Scene::GetTag() const
+	{
+		return m_tag;
 	}
 
 	Scene::~Scene()

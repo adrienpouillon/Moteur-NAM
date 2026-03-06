@@ -1,4 +1,4 @@
-#define MAX_TEXTURES 128
+#define MAX_TEXTURES 512
 
 cbuffer cbPerObject : register(b0)
 {

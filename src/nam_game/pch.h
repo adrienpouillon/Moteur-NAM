@@ -15,11 +15,22 @@ using namespace DirectX;
 #include "Tag.h"
 
 #include "Camera.h"
-#include "Player.h"
 #include "FPSDisplayer.h"
+#include "Score.h"
+
+#include "Rail.h"
+#include "RailGenerator.h"
+
+#include "PauseHandlerObject.h"
+#include "IWrappedScene.h"
+#include "WrappedSceneManager.h"
+
+#include "Player.h"
 #include "Shot.h"
 #include "Enemy.h"
-#include "Player.h"
+
+#include "CaveScene.h"
+#include "GameOverScene.h"
 
 
 #endif

@@ -45,9 +45,6 @@ namespace nam
 		};
 
 		Vector<TextureData> m_texturesDataToLoad;
-
-		DirectX::XMFLOAT2 m_posMouse;
-
 		LoadingScreen* mp_loadingScreen = nullptr;
 	public:
 		~App();
@@ -108,15 +105,19 @@ namespace nam
 		GameObject* GetGameObject(u32 idEntity);
 		GameObject* GetGameObject(Entity& entity);
 
-		Scene* CreateScene();
+		Scene* CreateScene(size sceneTag);
 		void DestroyScene(Scene* scene);
 		void AddCurrentScene(u32 idScene);
 		void AddCurrentScene(Scene* scene);
+		void AddCurrentScene(size sceneTag);
+
 		void RemoveCurrentScene(Scene* scene);
 		void RemoveCurrentScene(u32 idScene);
+		void RemoveCurrentScene(size sceneTag);
+
 		void SwitchCurrentScene(Scene* sceneClose, Scene* sceneOpen);
 		void SwitchCurrentScene(u32 idSceneClose, u32 idSceneOpen);
-		
+		void SwitchCurrentScene(size sceneTag1, size sceneTag2);
 		//Use it if your mesh need to be used in many Objects;
 		//After that, Use the SetMeshInstance in the MeshRendererComponent
 		Mesh* CreateEmptyMesh();
@@ -132,11 +133,7 @@ namespace nam
 		Scene* GetScene(u32 idScene);
 		Scene* GetScene(Entity& entity);
 
-		void ShowMouseCursor(bool show);
-		void SetMouseCenter();
-		DirectX::XMFLOAT2 GetMousePosition();
-
-		/*Ecs& GetEcs();*/
+		Ecs& GetEcs();
 		SceneManager& GetSceneManager();
     
 		Window& GetWindow();

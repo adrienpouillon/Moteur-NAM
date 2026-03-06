@@ -49,11 +49,28 @@ namespace nam
 		return true;
 	}
 
+	void RenderItemManager::SetRenderItemTag(ARenderItem* renderItem, size tag)
+	{
+		m_taggedRenderItems[tag] = renderItem;
+	}
+
 	ARenderItem* RenderItemManager::GetRenderItem(u32 itemID)
 	{
 		auto it = m_renderItems.find(itemID);
 
 		if (it == m_renderItems.end())
+		{
+			_ASSERT(false && "RenderItem not found ! Can't Get !");
+			return nullptr;
+		}
+
+		return it->second;
+	}
+	ARenderItem* RenderItemManager::GetRenderItemOfTag(size tag)
+	{
+		auto it = m_taggedRenderItems.find(tag);
+
+		if (it == m_taggedRenderItems.end())
 		{
 			_ASSERT(false && "RenderItem not found ! Can't Get !");
 			return nullptr;

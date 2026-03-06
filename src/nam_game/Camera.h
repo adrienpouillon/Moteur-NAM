@@ -1,6 +1,6 @@
 #pragma once
 
-#define CAMERA_SPEED_MOVE 10.f
+#define CAMERA_SPEED_MOVE 20.f
 #define CAMERA_SPEED_UP 3.f
 
 #define SENSITIVITY_CAMERA 0.002f

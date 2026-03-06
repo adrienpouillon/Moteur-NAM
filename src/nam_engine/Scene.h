@@ -19,6 +19,7 @@ namespace nam
 		uint32_t m_id;
 		bool m_isActive;
 
+		size m_tag = -1;
 	private:
 		Scene();
 
@@ -32,7 +33,7 @@ namespace nam
 
 		virtual void Destroy();
 
-		void Reset();
+		void ResetScene();
 
 		template<typename T>
 		T* CreateGameObject();
@@ -41,9 +42,9 @@ namespace nam
 
 		void SetActiveEntity(Entity& entity, bool active);
 
-	protected:
-
 		void SetActiveAllEntity(bool active);
+
+	protected:
 
 		void DestroyEntity(Entity& entity);
 		void DestroyAllGameObject();
@@ -55,6 +56,7 @@ namespace nam
 		const Entity GetEntity(uint32_t idEntity);
 		GameObject* GetGameObject(Entity& entity);
 		GameObject* GetGameObject(uint32_t idEntity);
+
 		const UnMap<u32, GameObject*>& GetAllGameObject() const;
 
 		void SetId(u32 id);
@@ -64,6 +66,7 @@ namespace nam
 		//Ecs* GetEcs();
 
 		bool GetIsActive() const;
+		const size& GetTag() const;
 
 		virtual ~Scene();
 

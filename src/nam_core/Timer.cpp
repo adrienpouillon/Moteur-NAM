@@ -8,7 +8,7 @@ namespace nam
 		Init(targetTime, countdownMode, isPaused);
 	}
 
-	void Timer::Init(float targetTime, bool applyTimeWarp, bool countdownMode, bool isPaused)
+	void Timer::Init(float targetTime, bool countdownMode, bool isPaused)
 	{
 		m_targetTime = targetTime;
 		m_countdownMode = countdownMode;
@@ -52,10 +52,7 @@ namespace nam
 	}
 	void Timer::ResetProgress()
 	{
-		if (m_countdownMode == false)
-			m_progress = 0.f;
-		else
-			m_progress = m_targetTime;
+		(m_countdownMode) ? m_progress = m_targetTime : m_progress = 0.f;
 	}
 
 	const float Timer::GetTargetTime() const
@@ -64,7 +61,7 @@ namespace nam
 	}
 	void Timer::SetTargetTime(float time)
 	{
-		m_progress = 0.f;
+		ResetProgress();
 		m_targetTime = time;
 	}
 	bool Timer::IsTargetReached() const

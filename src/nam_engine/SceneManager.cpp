@@ -50,6 +50,7 @@ namespace nam
 	void SceneManager::AddCurrentScene(Scene* scene)
 	{
 		SetActiveScene(scene, true);
+		m_allCurrentScenesByTag[scene->GetTag()] = scene;
 		m_allCurrentScene[scene->GetId()] = scene;
 	}
 
@@ -63,15 +64,36 @@ namespace nam
 		}
 	}
 
+	void SceneManager::AddCurrentScene(size sceneTag)
+	{
+		Scene* scene = GetSceneByTag(sceneTag);
+		_ASSERT(scene && "AddCurrentScene() : idScene a ete invalide");
+		if (scene != nullptr)
+		{
+			AddCurrentScene(scene);
+		}
+	}
+
 	void SceneManager::RemoveCurrentScene(Scene* scene)
 	{
 		SetActiveScene(scene, false);
+		m_allCurrentScenesByTag.erase(scene->GetTag());
 		m_allCurrentScene.erase(scene->GetId());
 	}
 
 	void SceneManager::RemoveCurrentScene(u32 idScene)
 	{
 		Scene* scene = GetScene(idScene);
+		_ASSERT(scene && "RemoveCurrentScene() : idScene a ete invalide");
+		if (scene != nullptr)
+		{
+			RemoveCurrentScene(scene);
+		}
+	}
+
+	void SceneManager::RemoveCurrentScene(size sceneTag)
+	{
+		Scene* scene = GetSceneByTag(sceneTag);
 		_ASSERT(scene && "RemoveCurrentScene() : idScene a ete invalide");
 		if (scene != nullptr)
 		{
@@ -91,15 +113,23 @@ namespace nam
 		AddCurrentScene(idSceneOpen);
 	}
 
-	Scene* SceneManager::CreateScene()
+	void SceneManager::SwitchCurrentScene(size sceneTag1, size sceneTag2)
+	{
+		RemoveCurrentScene(sceneTag1);
+		AddCurrentScene(sceneTag2);
+	}
+
+	Scene* SceneManager::CreateScene(size sceneTag)
 	{
 		Scene* scene = new Scene();
 		scene->SetId(m_idNext);
 		scene->SetEcs(mp_ecs);
 		scene->SetAllGameObjectInAllScene(&m_allGameObjectInAllScene);
+		scene->m_tag = sceneTag;
 		IncreaseIdNext();
 
 		m_allScene[scene->GetId()] = scene;
+		m_allSceneByTag[sceneTag] = scene;
 
 		SetActiveScene(scene, false);
 		return scene;
@@ -156,6 +186,16 @@ namespace nam
 	}
 
 //public
+	Scene* SceneManager::GetSceneByTag(size sceneTag)
+	{
+		auto it = m_allSceneByTag.find(sceneTag);
+		if (it != m_allSceneByTag.end())
+		{
+			return it->second;
+		}
+
+		return nullptr;
+	}
 
 	Scene* SceneManager::GetScene(u32 idScene)
 	{
@@ -197,20 +237,20 @@ namespace nam
 		return m_allGameObjectInAllScene;
 	}
 
-	const UnMap<u32, Scene*>& SceneManager::GetCurrenteScene() const
+	const UnMap<u32, Scene*>& SceneManager::GetCurrentScenes() const
 	{
 		return m_allCurrentScene;
+	}
+
+	const UnMap<size, Scene*>& SceneManager::GetCurrentScenesByTag() const
+	{
+		return m_allCurrentScenesByTag;
 	}
 
 	void SceneManager::SetEcs(Ecs* ecs)
 	{
 		mp_ecs = ecs;
 	}
-
-	/*Ecs* SceneManager::GetEcs()
-	{
-		return mp_ecs;
-	}*/
 
 	SceneManager::~SceneManager()
 	{

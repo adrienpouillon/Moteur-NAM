@@ -1,7 +1,6 @@
 #include "pch.h"
 #include "App.h"
 #include <RenderManager.h>
-#include <Windowsx.h>
 
 #include "RenderSystem.h"
 #include "PhysicSystem.h"
@@ -15,9 +14,6 @@
 #include "CameraComponent.h"
 
 #include "Window.h"
-
-// TODO :: remove 
-#include "Input.h"
 
 #include <Mesh.h>
 #include <Sprite.h>
@@ -104,8 +100,6 @@ namespace nam
 			return 0;
 
 		case WM_MOUSEMOVE:
-			m_posMouse.x = (float)GET_X_LPARAM(lParam);
-			m_posMouse.y = (float)GET_Y_LPARAM(lParam);
 			return 0;
 		}
 
@@ -175,7 +169,7 @@ namespace nam
 		StartCamera();
 
 		//Loading Screen first frame
-		Scene* p_loadingScene = m_sceneManager.CreateScene();
+		Scene* p_loadingScene = m_sceneManager.CreateScene(size(-1));
 
 		mp_loadingScreen = p_loadingScene->CreateGameObject<LoadingScreen>();
 
@@ -382,9 +376,9 @@ namespace nam
 		return m_sceneManager.GetGameObjectInGame(entity);
 	}
 
-	Scene* App::CreateScene()
+	Scene* App::CreateScene(size sceneTag)
 	{
-		return m_sceneManager.CreateScene();
+		return m_sceneManager.CreateScene(sceneTag);
 	}
 
 	void App::DestroyScene(Scene* scene)
@@ -402,6 +396,11 @@ namespace nam
 		m_sceneManager.AddCurrentScene(scene);
 	}
 
+	void App::AddCurrentScene(size sceneTag)
+	{
+		m_sceneManager.AddCurrentScene(sceneTag);
+	}
+
 	void App::RemoveCurrentScene(Scene* scene)
 	{
 		m_sceneManager.RemoveCurrentScene(scene);
@@ -412,6 +411,11 @@ namespace nam
 		m_sceneManager.RemoveCurrentScene(idScene);
 	}
 
+	void App::RemoveCurrentScene(size sceneTag)
+	{
+		m_sceneManager.RemoveCurrentScene(sceneTag);
+	}
+
 	void App::SwitchCurrentScene(Scene* sceneClose, Scene* sceneOpen)
 	{
 		m_sceneManager.SwitchCurrentScene(sceneClose, sceneOpen);
@@ -420,6 +424,11 @@ namespace nam
 	void App::SwitchCurrentScene(u32 idSceneClose, u32 idSceneOpen)
 	{
 		m_sceneManager.SwitchCurrentScene(idSceneClose, idSceneOpen);
+	}
+
+	void App::SwitchCurrentScene(size sceneTag1, size sceneTag2)
+	{
+		m_sceneManager.SwitchCurrentScene(sceneTag1, sceneTag2);
 	}
 
 	Scene* App::GetScene(u32 idScene)
@@ -441,32 +450,6 @@ namespace nam
 		return nullptr;
 	}
 
-	void App::ShowMouseCursor(bool show)
-	{
-		ShowCursor(show);
-	}
-
-	void App::SetMouseCenter()
-	{
-		HWND hwnd = m_window.m_hwnd;
-		RECT rect;
-		GetClientRect(hwnd, &rect);
-
-		POINT center;
-		center.x = (rect.right - rect.left) / 2;
-		center.y = (rect.bottom - rect.top) / 2;
-
-		//convertir en coordonn�e �cran
-		ClientToScreen(hwnd, &center);
-
-		SetCursorPos(center.x, center.y);
-	}
-
-	XMFLOAT2 App::GetMousePosition()
-	{
-		return m_posMouse;
-	}
-
 	Window& App::GetWindow()
 	{
 		return m_window;
@@ -477,10 +460,10 @@ namespace nam
 		return mp_camera;
 	}
 
-	/*Ecs& App::GetEcs()
+	Ecs& App::GetEcs()
 	{
 		return m_ecs;
-	}*/
+	}
 
 	Mesh* App::CreateEmptyMesh()
 	{

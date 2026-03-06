@@ -19,7 +19,7 @@ namespace nam
         voxels.resize(w * h * d, false);
     }
 
-    bool VoxelGrid::GetAt(int x, int y, int z)
+    bool VoxelGrid::GetAt(int x, int y, int z) const
     {
         if (x >= 0 && x < width && y >= 0 && y < height && z >= 0 && z < depth)
         {

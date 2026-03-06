@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "Camera.h"
 
+#include "SceneTags.h"
+
 Camera::Camera()
 {
 	m_debugMode = false;
@@ -11,20 +13,31 @@ Camera::Camera()
 
 void Camera::OnInit()
 {
-	m_debugMode = false;
-	m_rotateMode = true;
 	mp_appCamera = nullptr;
 	SetBehavior();
+	SetTag((int)Tag::_Camera);
 }
 
 void Camera::OnStart()
 {
-	SetTag((int)Tag::_Camera);
+	m_debugMode = false;
+	m_rotateMode = true;
 }
 
 void Camera::OnUpdate()
 {
 	App* app = App::Get();
+
+	SceneManager& sm = app->GetSceneManager();
+
+	auto it = sm.GetCurrentScenes().find(sm.GetSceneByTag(_PauseScene)->GetId());
+
+	if (it != sm.GetCurrentScenes().end())
+	{
+		Input::ShowMouse();
+		return;
+	}
+
 	float dt = app->GetChrono().GetScaledDeltaTime();
 
 	GameObject* appCamera = app->GetCamera();
@@ -53,15 +66,19 @@ void Camera::OnUpdate()
 	}
 
 	if (Input::IsKeyDown(VK_SHIFT)) { SetDebugMode(!debugMode); }
-	if (Input::IsKeyDown(VK_TAB)) { app->ShowMouseCursor(rotateMode); SetRotateMode(!rotateMode); }
+	if (Input::IsKeyDown(VK_TAB)) { SetRotateMode(!rotateMode); }
 
 	if (rotateMode)
 	{
+		Input::HideMouse();
+
 		Window& window = app->GetWindow();
 		XMFLOAT2 size = XMFLOAT2((float)window.m_clientWidth, (float)window.m_clientHeight);
 		XMFLOAT2 centerSize = XMFLOAT2(size.x * 0.5f, size.y * 0.5f);
-		XMFLOAT2 posMouse = app->GetMousePosition();
-		XMFLOAT2 delta = XMFLOAT2(posMouse.x - centerSize.x, posMouse.y - centerSize.y);
+		Input::UpdateMouseDelta();
+		XMFLOAT2 posMouse = Input::GetMousePostion();
+		XMFLOAT2 delta = Input::GetMouseDelta();
+		Input::SetMousePosition(centerSize);
 
 		// Rotation
 		XMFLOAT3 yawPitchRoll = GetYawPitchRoll();
@@ -79,7 +96,10 @@ void Camera::OnUpdate()
 		SetRotateLocal(yawPitchRoll.x, yawPitchRoll.y, angleZero);
 		SetYawPitchRoll(yawPitchRoll);
 
-		app->SetMouseCenter();
+	}
+	else
+	{
+		Input::ShowMouse();
 	}
 }
 
@@ -177,7 +197,7 @@ void Camera::SetMode(const Mode mode)
 {
 	switch (mode)
 	{
-	case Mode::_No :
+	case Mode::_No:
 		m_rotateMode = false;
 		m_debugMode = false;
 		break;

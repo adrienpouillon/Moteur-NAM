@@ -1,5 +1,5 @@
 #define MAX_LIGHTS 64
-#define MAX_TEXTURES 128
+#define MAX_TEXTURES 512
 #define DIRECTIONNAL_LIGHT 0
 #define POINT_LIGHT 1
 #define SPOT_LIGHT 2

@@ -3,6 +3,9 @@
 
 #include "RenderManager.h"
 #include "CommandManager.h"
+
+#include "Constants.h"
+
 namespace nam
 {
 	Text::Text()
@@ -54,6 +57,8 @@ namespace nam
 		m_characterSize = characterSize;
 		m_color = textColor;
 
+		SetTexture(_FontPusab);
+
 		for (size_t i = 0; i < 256; i++)
 		{
 			m_offsets[i] = { -1, -1 };
@@ -102,7 +107,6 @@ namespace nam
 		m_offsets['.'] = { (float)posX, (float)posY};
 		m_offsets[','] = { (float)posX + 1, (float)posY };
 
-		//TODO
 		m_offsets[';'] = { (float)posX + 2, (float)posY };
 		m_offsets[':'] = { (float)posX + 3, (float)posY };
 
@@ -118,13 +122,16 @@ namespace nam
 		m_offsets['('] = { (float)posX + 4, (float)posY + 1};
 		m_offsets[')'] = { (float)posX + 5, (float)posY + 1};
 		m_offsets['@'] = { (float)posX + 6, (float)posY + 1};
-
-		InitOffsets();
 	}
 
 	const DirectX::XMFLOAT2& Text::GetCharacterSize() const
 	{
 		return m_characterSize;
+	}
+
+	const float& Text::GetKerning() const
+	{
+		return m_kerning;
 	}
 
 	void Text::ChangeKerning(float kerning)
@@ -139,10 +146,6 @@ namespace nam
 		SetText(m_currentText);
 	}
 
-	void Text::InitOffsets()
-	{
-		int count = 0;
-	}
 	void Text::AddRect(XMFLOAT4 color, char c)
 	{
 		if (c == '\n')

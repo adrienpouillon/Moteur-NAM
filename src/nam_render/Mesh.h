@@ -35,7 +35,7 @@ namespace nam
         void BuildPlane(DirectX::XMFLOAT2 size, DirectX::XMFLOAT4 color, bool doubleFaced = false, DirectX::XMFLOAT3 offset = { 0, 0, 0 }, DirectX::XMFLOAT3 ypr = { 0, 0, 0 });
 
         void BuildFromVoxels(VoxelGrid& grid, DirectX::XMFLOAT4 color);
-        void AddCubeFace(const DirectX::XMFLOAT3& center, float halfSize, CubeFace face, const DirectX::XMFLOAT4& color);
+        void AddCubeFace(const DirectX::XMFLOAT3& center, float halfVoxel, CubeFace face, const DirectX::XMFLOAT4& color);
 
         void MakeVerticesColorFromNormals(DirectX::XMFLOAT4 flatColor, DirectX::XMFLOAT4 slopeColor);
 
@@ -45,6 +45,15 @@ namespace nam
 
         void LoadObj(const std::wstring path, DirectX::XMFLOAT3 color = {1, 1, 1});
 
+        //Doesn't copy GPU datas
+        //The target mesh will receive This mesh data
+        //Can be risky to use 
+        void CopyDataTo(Mesh* p_target);
+
+        //Doesn't copy GPU datas
+        //This mesh will receive the source data
+        //Can be risky to use 
+        void CopyDataFrom(Mesh* p_source);
     private:
         void UpdateMinMaxBounds();
         void UpdateCenterExtend();

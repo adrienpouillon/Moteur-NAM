@@ -156,19 +156,68 @@ namespace nam
 
     XMFLOAT3 PoissonDisc::GenerateRandomPointAround(const XMFLOAT3& center)
     {
-        float theta = Rng::Float(0.f, XM_2PI);
-        float phi = std::acos(Rng::Float(-1.0f, 1.0f));
+        float minExtent = min( m_extents.x, min(m_extents.y, m_extents.z));
+        float threshold = minExtent * 0.1f;
 
+        bool xFlat = m_extents.x < threshold;
+        bool yFlat = m_extents.y < threshold;
+        bool zFlat = m_extents.z < threshold;
+
+        int flatCount = (xFlat ? 1 : 0) + (yFlat ? 1 : 0) + (zFlat ? 1 : 0);
+
+        float theta = Rng::Float(0.f, XM_2PI);
         float r = m_minDistance * (1.0f + Rng::Float());
 
-        float x = r * std::sin(phi) * std::cos(theta);
-        float y = r * std::sin(phi) * std::sin(theta);
-        float z = r * std::cos(phi);
+        XMFLOAT3 offset = { 0,0,0 };
+
+        if (flatCount >= 2)
+        {
+            if (!xFlat)
+            {
+                float sign = Rng::Float() > 0.5f ? 1.0f : -1.0f;
+                offset.x = r * sign;
+            }
+            else if (!yFlat)
+            {
+                float sign = Rng::Float() > 0.5f ? 1.0f : -1.0f;
+                offset.y = r * sign;
+            }
+            else
+            {
+                float sign = Rng::Float() > 0.5f ? 1.0f : -1.0f;
+                offset.z = r * sign;
+            }
+        }
+        else if (flatCount == 1) 
+        {
+            if (yFlat)
+            {
+                offset.x = r * std::cos(theta);
+                offset.z = r * std::sin(theta);
+            }
+            else if (xFlat) 
+            {
+                offset.y = r * std::cos(theta);
+                offset.z = r * std::sin(theta);
+            }
+            else if (zFlat)
+            {
+                offset.x = r * std::cos(theta);
+                offset.y = r * std::sin(theta);
+            }
+        }
+        else 
+        {
+            float phi = std::acos(Rng::Float(-1.0f, 1.0f));
+            offset.x = r * std::sin(phi) * std::cos(theta);
+            offset.y = r * std::sin(phi) * std::sin(theta);
+            offset.z = r * std::cos(phi);
+        }
 
         return XMFLOAT3(
-            center.x + x,
-            center.y + y,
-            center.z + z
+            center.x + offset.x,
+            center.y + offset.y,
+            center.z + offset.z
         );
     }
 }

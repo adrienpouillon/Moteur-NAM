@@ -3,19 +3,20 @@
 
 Shot::Shot()
 {
-
+	m_speed = 1;
+	m_time = {};
 }
 
 void Shot::OnInit()
 {
-	m_time.Init(LIFETIME_SHOT, true, false);
 	SetBehavior();
 	SetTag((int)Tag::_Shot);
 }
 
 void Shot::OnStart()
 {
-
+	m_time.Init(LIFETIME_SHOT, true, false);
+	SetActiveEntity(true);
 }
 
 void Shot::OnUpdate()
@@ -33,8 +34,13 @@ void Shot::OnCollision(u32 self, u32 other, const CollisionInfo& collisionInfo)
 {
 	GameObject* gameObject = App::Get()->GetGameObject(other);
 	int tagOther = gameObject->GetTag();
+
 	if (tagOther == (int)Tag::_Enemy)
 	{
+		Enemy* p_enemy = (Enemy*)gameObject;
+
+		p_enemy->RemoveHP(1);
+
 		DestroyGameObject();
 	}
 }
@@ -79,6 +85,7 @@ Shot* Shot::CreateShot(Scene* scene, const XMFLOAT3& position, const XMFLOAT4& r
 	shot->SetSpeed(speed);
 	shot->SetLifeTime(lifeTime);
 	shot->SetSphereCollider();
+	shot->SetMesh(mesh);
 	shot->Start();
 	return shot;
 }
