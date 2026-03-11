@@ -28,6 +28,15 @@ namespace nam
 		mp_text = p_text;
 	}
 
+	void TextRendererComponent::SetTextPrint(const std::string& stringPrint, bool isRaindow)
+	{
+		mp_text->SetText(stringPrint);
+		if (isRaindow)
+		{
+			mp_text->MakeRainbowVertices();
+		}
+	}
+
 	void TextRendererComponent::DeleteTextInstance()
 	{
 		Render->GetRenderItemManager().RemoveRenderItem(mp_text);

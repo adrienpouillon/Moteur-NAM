@@ -21,12 +21,7 @@ namespace nam
 		m_entity = entity;
 		m_canDeleteMesh = false;
 
-		TransformComponent transform = TransformComponent();
-		transform.SetWorldPosition(XMFLOAT3(0.f, 0.f, 0.f));
-		AddComponent(transform);
-
-		//save le component
-		//mp_transform = &GetComponent<TransformComponent>();
+		SetupTransform(XMFLOAT3(0.f, 0.f, 0.f));
 
 		OnInit();
 	}
@@ -44,6 +39,21 @@ namespace nam
 	void GameObject::Collider(u32 self, u32 other, const CollisionInfo& collisionInfo)
 	{
 		OnCollision(self, other, collisionInfo);
+	}
+
+	void GameObject::Hovered()
+	{
+		OnHovered();
+	}
+
+	void GameObject::Click()
+	{
+		OnClick();
+	}
+
+	void GameObject::Left()
+	{
+		OnLeft();
 	}
 
 //private
@@ -87,6 +97,18 @@ namespace nam
 
 	}
 
+	void GameObject::OnHovered()
+	{
+	}
+
+	void GameObject::OnClick()
+	{
+	}
+
+	void GameObject::OnLeft()
+	{
+	}
+
 	void GameObject::SetActiveEntity(bool active)
 	{
 		mp_scene->SetActiveEntity(m_entity, active);
@@ -99,224 +121,239 @@ namespace nam
 
 	void GameObject::SetWorldPosition(const XMFLOAT3& position)
 	{
-		GetComponent<TransformComponent>().SetWorldPosition(position);
+		mp_transform->SetWorldPosition(position);
 	}
 
 	XMFLOAT3 GameObject::GetWorldPosition()
 	{
-		return GetComponent<TransformComponent>().GetWorldPosition();
+		return mp_transform->GetWorldPosition();
 	}
 
 	void GameObject::SetLocalPosition(const XMFLOAT3& position)
 	{
-		GetComponent<TransformComponent>().SetLocalPosition(position);
+		mp_transform->SetLocalPosition(position);
 	}
 
 	XMFLOAT3 GameObject::GetLocalPosition()
 	{
-		return GetComponent<TransformComponent>().GetLocalPosition();
+		return mp_transform->GetLocalPosition();
 	}
 
 	void GameObject::SetWorldRotation(const XMFLOAT4& quat)
 	{
-		GetComponent<TransformComponent>().SetWorldRotation(quat);
+		mp_transform->SetWorldRotation(quat);
 	}
 
 	XMFLOAT4 GameObject::GetWorldRotation()
 	{
-		return GetComponent<TransformComponent>().GetWorldRotation();
+		return mp_transform->GetWorldRotation();
 	}
 
 	void GameObject::SetLocalRotation(const XMFLOAT4& quat)
 	{
-		GetComponent<TransformComponent>().SetLocalRotation(quat);
+		mp_transform->SetLocalRotation(quat);
 	}
 
 	XMFLOAT4 GameObject::GetLocalRotation()
 	{
-		return GetComponent<TransformComponent>().GetLocalRotation();
+		return mp_transform->GetLocalRotation();
 	}
 
 	void GameObject::SetWorldScale(const XMFLOAT3& scale)
 	{
-		GetComponent<TransformComponent>().SetWorldScale(scale);
+		mp_transform->SetWorldScale(scale);
 	}
 
 	XMFLOAT3 GameObject::GetWorldScale()
 	{
-		return GetComponent<TransformComponent>().GetWorldScale();
+		return mp_transform->GetWorldScale();
 	}
 
 	void GameObject::SetLocalScale(const XMFLOAT3& scale)
 	{
-		GetComponent<TransformComponent>().SetLocalScale(scale);
+		mp_transform->SetLocalScale(scale);
 	}
 
 	XMFLOAT3 GameObject::GetLocalScale()
 	{
-		return GetComponent<TransformComponent>().GetLocalScale();
+		return mp_transform->GetLocalScale();
 	}
 
 	void GameObject::SetLocalYaw(const float yaw)
 	{
-		GetComponent<TransformComponent>().SetLocalYPR(yaw, 0.f, 0.f);
+		mp_transform->SetLocalYPR(yaw, 0.f, 0.f);
 	}
 
 	void GameObject::SetLocalPitch(const float pitch)
 	{
-		GetComponent<TransformComponent>().SetLocalYPR(0.f, pitch, 0.f);
+		mp_transform->SetLocalYPR(0.f, pitch, 0.f);
 	}
 
 	void GameObject::SetLocalRoll(const float roll)
 	{
-		GetComponent<TransformComponent>().SetLocalYPR(0.f, 0.f, roll);
+		mp_transform->SetLocalYPR(0.f, 0.f, roll);
 	}
 
 	void GameObject::SetLocalYPR(const float yaw, const float pitch, const float roll)
 	{
-		GetComponent<TransformComponent>().SetLocalYPR(yaw, pitch, roll);
+		mp_transform->SetLocalYPR(yaw, pitch, roll);
 	}
 
 	void GameObject::SetLocalYPR(const XMFLOAT3& yawPitchRoll)
 	{
-		GetComponent<TransformComponent>().SetLocalYPR(yawPitchRoll.x, yawPitchRoll.y, yawPitchRoll.z);
+		mp_transform->SetLocalYPR(yawPitchRoll.x, yawPitchRoll.y, yawPitchRoll.z);
 	}
 
 	XMFLOAT3 GameObject::GetLocalYPR()
 	{
 		XMFLOAT3 yawPitchRoll;
-		GetComponent<TransformComponent>().GetLocalYPR(yawPitchRoll.x, yawPitchRoll.y, yawPitchRoll.z);
+		mp_transform->GetLocalYPR(yawPitchRoll.x, yawPitchRoll.y, yawPitchRoll.z);
 		return yawPitchRoll;
 	}
 
 	void GameObject::SetWorldYaw(const float yaw)
 	{
-		GetComponent<TransformComponent>().SetWorldYPR(yaw, 0.f, 0.f);
+		mp_transform->SetWorldYPR(yaw, 0.f, 0.f);
 	}
 
 	void GameObject::SetWorldPitch(const float pitch)
 	{
-		GetComponent<TransformComponent>().SetWorldYPR(0.f, pitch, 0.f);
+		mp_transform->SetWorldYPR(0.f, pitch, 0.f);
 	}
 
 	void GameObject::SetWorldRoll(const float roll)
 	{
-		GetComponent<TransformComponent>().SetWorldYPR(0.f, 0.f, roll);
+		mp_transform->SetWorldYPR(0.f, 0.f, roll);
 	}
 
 	void GameObject::SetWorldYPR(const float yaw, const float pitch, const float roll)
 	{
-		GetComponent<TransformComponent>().SetWorldYPR(yaw, pitch, roll);
+		mp_transform->SetWorldYPR(yaw, pitch, roll);
 	}
 
 	void GameObject::SetWorldYPR(const XMFLOAT3& yawPitchRoll)
 	{
-		GetComponent<TransformComponent>().SetWorldYPR(yawPitchRoll.x, yawPitchRoll.y, yawPitchRoll.z);
+		mp_transform->SetWorldYPR(yawPitchRoll.x, yawPitchRoll.y, yawPitchRoll.z);
 	}
 
 	XMFLOAT3 GameObject::GetWorldYPR()
 	{
 		XMFLOAT3 yawPitchRoll;
-		GetComponent<TransformComponent>().GetWorldYPR(yawPitchRoll.x, yawPitchRoll.y, yawPitchRoll.z);
+		mp_transform->GetWorldYPR(yawPitchRoll.x, yawPitchRoll.y, yawPitchRoll.z);
 		return yawPitchRoll;
 	}
 
 	void GameObject::AddChild(TransformComponent* transform)
 	{
-		GetComponent<TransformComponent>().AddChild(transform);
+		mp_transform->AddChild(transform);
 	}
 
 	void GameObject::RemoveChild(TransformComponent* transform)
 	{
-		GetComponent<TransformComponent>().RemoveChild(transform);
+		mp_transform->RemoveChild(transform);
 	}
 
 	const Vector<TransformComponent*>& GameObject::GetAllChild()
 	{
-		return GetComponent<TransformComponent>().GetChildren();
+		return mp_transform->GetChildren();
 	}
 
 	TransformComponent* GameObject::GetParent()
 	{
-		return GetComponent<TransformComponent>().GetParent();
+		return mp_transform->GetParent();
 	}
 
 	XMFLOAT3 GameObject::GetWorldForward()
 	{
-		return GetComponent<TransformComponent>().GetWorldForward();
+		return mp_transform->GetWorldForward();
 	}
 
 	void GameObject::TranslateLocal(const XMFLOAT3& offset)
 	{
-		GetComponent<TransformComponent>().TranslateLocal(offset);
+		mp_transform->TranslateLocal(offset);
 	}
 
 	void GameObject::TranslateWorld(const XMFLOAT3& offset)
 	{
-		GetComponent<TransformComponent>().TranslateWorld(offset);
+		mp_transform->TranslateWorld(offset);
 	}
 
 	void GameObject::RotateLocalYPR(const float yaw, const float pitch, const float roll)
 	{
-		GetComponent<TransformComponent>().RotateLocalYPR(yaw, pitch, roll);
+		mp_transform->RotateLocalYPR(yaw, pitch, roll);
 	}
 
 	void GameObject::RotateLocalYPR(const DirectX::XMFLOAT3& yawPitchRoll)
 	{
-		GetComponent<TransformComponent>().RotateLocalYPR(yawPitchRoll.x, yawPitchRoll.y, yawPitchRoll.z);
+		mp_transform->RotateLocalYPR(yawPitchRoll.x, yawPitchRoll.y, yawPitchRoll.z);
 	}
 
 	void GameObject::RotateWorldYPR(const float yaw, const float pitch, const float roll)
 	{
-		GetComponent<TransformComponent>().RotateWorldYPR(yaw, pitch, roll);
+		mp_transform->RotateWorldYPR(yaw, pitch, roll);
 	}
 
 	void GameObject::RotateWorldYPR(const XMFLOAT3& yawPitchRoll)
 	{
-		GetComponent<TransformComponent>().RotateWorldYPR(yawPitchRoll.x, yawPitchRoll.y, yawPitchRoll.z);
+		mp_transform->RotateWorldYPR(yawPitchRoll.x, yawPitchRoll.y, yawPitchRoll.z);
 	}
 
 	void GameObject::MoveLocalForward(const float dis)
 	{
-		GetComponent<TransformComponent>().MoveLocalForward(dis);
+		mp_transform->MoveLocalForward(dis);
 	}
 
 	void GameObject::MoveWorldForward(const float dis)
 	{
-		GetComponent<TransformComponent>().MoveWorldForward(dis);
+		mp_transform->MoveWorldForward(dis);
 	}
 
 	void GameObject::MoveLocalTowards(const XMFLOAT3& target, const float dis)
 	{
-		GetComponent<TransformComponent>().MoveLocalTowards(target, dis);
+		mp_transform->MoveLocalTowards(target, dis);
 	}
 
 	void GameObject::MoveWorldTowards(const XMFLOAT3& target, const float dis)
 	{
-		GetComponent<TransformComponent>().MoveWorldTowards(target, dis);
+		mp_transform->MoveWorldTowards(target, dis);
 	}
 
 	void GameObject::LookToLocal(const XMFLOAT3& direction)
 	{
-		GetComponent<TransformComponent>().LookToLocal(direction);
+		mp_transform->LookToLocal(direction);
 	}
 
 	void GameObject::LookToWorld(const XMFLOAT3& direction)
 	{
-		GetComponent<TransformComponent>().LookToWorld(direction);
+		mp_transform->LookToWorld(direction);
 	}
 
 	void GameObject::LookAtLocal(const XMFLOAT3& target)
 	{
-		GetComponent<TransformComponent>().LookAtLocal(target);
+		mp_transform->LookAtLocal(target);
 	}
 
 	void GameObject::LookAtWorld(const XMFLOAT3& target)
 	{
-		GetComponent<TransformComponent>().LookAtWorld(target);
+		mp_transform->LookAtWorld(target);
 	}
 
-	void GameObject::SetMesh(Mesh& mesh)
+	void GameObject::ActiveDeleteMesh(bool isActive)
+	{
+		m_canDeleteMesh = isActive;
+	}
+
+	void GameObject::SetupTransform(const XMFLOAT3& pos)
+	{
+		TransformComponent transform = TransformComponent();
+		transform.SetWorldPosition(pos);
+		AddComponent(transform);
+
+		//save le component
+		mp_transform = &GetComponent<TransformComponent>();
+	}
+
+	void GameObject::SetupMesh(Mesh& mesh)
 	{
 		if (HasComponent<MeshRendererComponent>() == false)
 		{
@@ -332,13 +369,12 @@ namespace nam
 		}
 	}
   
-	void GameObject::SetMesh(Mesh* mesh)
+	void GameObject::SetupMesh(Mesh* mesh)
 	{
 		if (HasComponent<MeshRendererComponent>() == false)
 		{
 			MeshRendererComponent meshRenderer;
 			meshRenderer.SetMeshInstance(mesh);
-
 			AddComponent(meshRenderer);
 		}
 		else
@@ -348,24 +384,109 @@ namespace nam
 		}
 	}
 
-	void GameObject::ActiveDeleteMesh(bool isActive)
+	void GameObject::SetupSprite(Sprite& sprite)
 	{
-		m_canDeleteMesh = isActive;
+		if (HasComponent<SpriteRendererComponent>() == false)
+		{
+			SpriteRendererComponent spriteRenderer;
+			spriteRenderer.SetSpriteInstance(&sprite);
+
+			AddComponent(spriteRenderer);
+		}
+		else
+		{
+			SpriteRendererComponent& spriteRenderer = GetComponent<SpriteRendererComponent>();
+			spriteRenderer.SetSpriteInstance(&sprite);
+		}
 	}
 
-	void GameObject::SetBehavior()
+	void GameObject::SetupSprite(Sprite* sprite)
 	{
-		SetFunctionUpdate(this, &GameObject::Update);
+		if (HasComponent<SpriteRendererComponent>() == false)
+		{
+			SpriteRendererComponent spriteRenderer;
+			spriteRenderer.SetSpriteInstance(sprite);
+			AddComponent(spriteRenderer);
+		}
+		else
+		{
+			SpriteRendererComponent& spriteRenderer = GetComponent<SpriteRendererComponent>();
+			spriteRenderer.SetSpriteInstance(sprite);
+		}
 	}
 
-	void GameObject::SetBoxCollider()
+	void GameObject::SetupText(const XMFLOAT2& charaScale, float zoom, const XMFLOAT4& color)
 	{
-		SetBoxCollider(this, &GameObject::Collider);
+		if (HasComponent<MeshRendererComponent>() == false)
+		{
+			TextRendererComponent textRender;
+			Text* p_text = textRender.CreateTextInstance();
+			p_text->SetDatas(charaScale, zoom, color);
+			p_text->SetText("??? : ");
+			p_text->SetTexture(_FontPusab);
+			p_text->SetToDynamic(MAX_TEXT_VERTICES, MAX_TEXT_INDICES);
+			AddComponent(textRender);
+		}
+		else
+		{
+			TextRendererComponent& textRender = GetComponent<TextRendererComponent>();
+			Text* p_text = textRender.CreateTextInstance();
+			p_text->SetDatas(charaScale, zoom, color);
+			p_text->SetText("??? : ");
+			p_text->SetTexture(_FontPusab);
+			p_text->SetToDynamic(MAX_TEXT_VERTICES, MAX_TEXT_INDICES);
+			textRender.SetTextInstance(p_text);
+		}
 	}
 
-	void GameObject::SetSphereCollider()
+	void GameObject::SetupBehavior()
 	{
-		SetSphereCollider(this, &GameObject::Collider);
+		SetupFunctionUpdate(this, &GameObject::Update);
+	}
+
+	void GameObject::SetupBoxCollider()
+	{
+		SetupBoxCollider(this, &GameObject::Collider);
+	}
+
+	void GameObject::SetupSphereCollider()
+	{
+		SetupSphereCollider(this, &GameObject::Collider);
+	}
+
+	void GameObject::SetupButton()
+	{
+		SetupButton(this, &GameObject::Hovered, &GameObject::Click, &GameObject::Left);
+	}
+
+	void GameObject::SetupParticle(const XMFLOAT3& minXYZ, const XMFLOAT3& maxXYZ, const XMFLOAT3& minDir, const XMFLOAT3& maxDir, const XMFLOAT3& startColor, const XMFLOAT3& endColor, float minSpeed, float maxSpeed, float lifeTime, float spawnRate)
+	{
+		if (HasComponent<ParticleEmitersComponent>() == false)
+		{
+			ParticleEmitersComponent emiters;
+			emiters.AddEmiter(maxXYZ, minXYZ, maxDir, minDir, startColor, endColor, maxSpeed, minSpeed, lifeTime, spawnRate);
+			AddComponent(emiters);
+		}
+		else
+		{
+			ParticleEmitersComponent& emiters = GetComponent<ParticleEmitersComponent>();
+			emiters.AddEmiter(maxXYZ, minXYZ, maxDir, minDir, startColor, endColor, maxSpeed, minSpeed, lifeTime, spawnRate);
+		}
+	}
+
+	void GameObject::SetupStateMachine(int stateCount)
+	{
+		if (HasComponent<StateMachineComponent>() == false)
+		{
+			StateMachineComponent stateMachine = StateMachineComponent(this, stateCount);
+			stateMachine;
+			AddComponent(stateMachine);
+		}
+		else
+		{
+			StateMachineComponent& stateMachine = GetComponent<StateMachineComponent>();
+			stateMachine.AddEmiter(maxXYZ, minXYZ, maxDir, minDir, startColor, endColor, maxSpeed, minSpeed, lifeTime, spawnRate);
+		}
 	}
 
 	Entity* GameObject::GetEntity()

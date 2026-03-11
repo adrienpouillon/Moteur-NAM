@@ -14,6 +14,8 @@ namespace nam
 		//Using a existing Text
 		void SetTextInstance(Text* p_text);
 
+		void SetTextPrint(const std::string& stringPrint, bool isRaindow);
+
 		//Delete the Text member
 		void DeleteTextInstance();
 	};

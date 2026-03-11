@@ -1,23 +1,23 @@
 #include "pch.h"
-#include "Player.h"
+#include "Enemy.h"
 
-Player::Player()
+Enemy::Enemy()
 {
 
 }
 
-void Player::OnInit()
+void Enemy::OnInit()
 {
 	SetupBehavior();
 	SetTag((int)Tag::_Player);
 }
 
-void Player::OnStart()
+void Enemy::OnStart()
 {
 
 }
 
-void Player::OnUpdate()
+void Enemy::OnUpdate()
 {
 	AppChrono& chrono = App::Get()->GetChrono();
 	float dt = chrono.GetScaledDeltaTime();
@@ -57,43 +57,44 @@ void Player::OnUpdate()
 		TranslateWorld(translation);
 	}
 
-	/*GameObject* gameObjectParticleEmitter = GetParticleEmitter();
+	GameObject* gameObjectParticleEmitter = GetParticleEmitter();
 	ParticleEmitersComponent& particleEmiters = gameObjectParticleEmitter->GetComponent<ParticleEmitersComponent>();
 	particleEmiters.m_maxXYZ[INDEX_PARTICLE_PlAYER] = XMFLOAT3(posPlayer.x + OFFSET_CENTER_PARTICLE, posPlayer.y + OFFSET_CENTER_PARTICLE, posPlayer.z + OFFSET_CENTER_PARTICLE);
-	particleEmiters.m_minXYZ[INDEX_PARTICLE_PlAYER] = XMFLOAT3(posPlayer.x - OFFSET_CENTER_PARTICLE, posPlayer.y - OFFSET_CENTER_PARTICLE, posPlayer.z - OFFSET_CENTER_PARTICLE);*/
+	particleEmiters.m_minXYZ[INDEX_PARTICLE_PlAYER] = XMFLOAT3(posPlayer.x - OFFSET_CENTER_PARTICLE, posPlayer.y - OFFSET_CENTER_PARTICLE, posPlayer.z - OFFSET_CENTER_PARTICLE);
 }
 
-void Player::OnCollision(u32 self, u32 other, const CollisionInfo& collisionInfo)
+void Enemy::OnCollision(u32 self, u32 other, const CollisionInfo& collisionInfo)
 {
 
 }
 
-void Player::OnDestroy()
+void Enemy::OnDestroy()
 {
 
 }
 
-void Player::SetParticleEmitter(GameObject* particleEmitter)
+void Enemy::SetParticleEmitter(GameObject* particleEmitter)
 {
 	mp_particleEmitter = particleEmitter;
 }
 
-GameObject* Player::GetParticleEmitter()
+GameObject* Enemy::GetParticleEmitter()
 {
 	return mp_particleEmitter;
 }
 
-void Player::SetScore(Score* score)
+void Enemy::SetScore(Score* score)
 {
 	m_score = score;
 }
 
-void Player::IncreaseGameScore(int add)
+void Enemy::IncreaseGameScore(int add)
 {
 	m_score->IncreaseScore(add);
 }
 
-Score* Player::GetScore()
+Score* Enemy::GetScore()
 {
 	return m_score;
 }
+

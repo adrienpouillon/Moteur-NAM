@@ -22,7 +22,7 @@ namespace nam
 	}
 
 	template<typename T>
-	inline void GameObject::SetFunctionUpdate(T* owner, void(T::* Update)())
+	inline void GameObject::SetupFunctionUpdate(T* owner, void(T::* Update)())
 	{
 		if (HasComponent<BehaviorComponent>() == false)
 		{
@@ -42,7 +42,7 @@ namespace nam
 	}
 
 	template<typename T>
-	inline void GameObject::SetBoxCollider(T* owner, void(T::* Collide)(u32 self, u32 other, const CollisionInfo& collisionInfo))
+	inline void GameObject::SetupBoxCollider(T* owner, void(T::* Collide)(u32 self, u32 other, const CollisionInfo& collisionInfo))
 	{
 		if (HasComponent<BoxColliderComponent>() == false)
 		{
@@ -63,7 +63,7 @@ namespace nam
 	}
 
 	template<typename T>
-	void GameObject::SetSphereCollider(T* owner, void(T::* Collide)(u32 self, u32 other, const CollisionInfo& collisionInfo))
+	void GameObject::SetupSphereCollider(T* owner, void(T::* Collide)(u32 self, u32 other, const CollisionInfo& collisionInfo))
 	{
 		if (HasComponent<BoxColliderComponent>() == false)
 		{
@@ -76,9 +76,42 @@ namespace nam
 		}
 		else
 		{
-			BoxColliderComponent& sphereCollider = GetComponent<BoxColliderComponent>();
+			SphereColliderComponent& sphereCollider = GetComponent<SphereColliderComponent>();
 			sphereCollider.OnCollision = [owner, Collide](u32 self, u32 other, const CollisionInfo& collisionInfo) {
 				(owner->*Collide)(self, other, collisionInfo);
+				};
+		}
+	}
+
+	template<typename T>
+	void GameObject::SetupButton(T* owner, void(T::* Hovered)(), void(T::* Click)(), void(T::* Left)())
+	{
+		if (HasComponent<ButtonComponent>() == false)
+		{
+			ButtonComponent button;
+			button.OnHovered = [owner, Hovered]() {
+				(owner->*Hovered)();
+				};
+			button.OnClick = [owner, Click]() {
+				(owner->*Click)();
+				};
+			button.OnLeft = [owner, Left]() {
+				(owner->*Left)();
+				};
+
+			AddComponent(button);
+		}
+		else
+		{
+			ButtonComponent& button = GetComponent<ButtonComponent>();
+			button.OnHovered = [owner, Hovered]() {
+				(owner->*Hovered)();
+				};
+			button.OnClick = [owner, Click]() {
+				(owner->*Click)();
+				};
+			button.OnLeft = [owner, Left]() {
+				(owner->*Left)();
 				};
 		}
 	}

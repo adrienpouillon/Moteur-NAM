@@ -20,13 +20,19 @@ namespace nam
 		void Start();
 		void Update();
 		void Collider(u32 self, u32 other, const CollisionInfo& collisionInfo);
-		
+		void Hovered();
+		void Click();
+		void Left();
 
 		virtual void OnInit();
 		virtual void OnStart();
 		virtual void OnUpdate();
 		virtual void OnCollision(u32 self, u32 other, const CollisionInfo& collisionInfo);
 		virtual void OnDestroy();
+		virtual void OnHovered();
+		virtual void OnClick();
+		virtual void OnLeft();
+
 
 		void SetActiveEntity(bool active);
 		void DestroyGameObject();
@@ -90,13 +96,27 @@ namespace nam
 		void LookAtLocal(const DirectX::XMFLOAT3& target);
 		void LookAtWorld(const DirectX::XMFLOAT3& target);
 
-		void SetMesh(Mesh& mesh);
-		void SetMesh(Mesh* mesh);
 		void ActiveDeleteMesh(bool isActive);
 
-		void SetBehavior();
-		void SetBoxCollider();
-		void SetSphereCollider();
+	private:
+		void SetupTransform(const DirectX::XMFLOAT3& pos);
+
+	public:
+		void SetupMesh(Mesh& mesh);
+		void SetupMesh(Mesh* mesh);
+
+		void SetupSprite(Sprite& sprite);
+		void SetupSprite(Sprite* sprite);
+
+		void SetupText(const DirectX::XMFLOAT2& charaScale, float zoom, const DirectX::XMFLOAT4& color);
+
+		void SetupBehavior();
+		void SetupBoxCollider();
+		void SetupSphereCollider();
+		void SetupButton();
+
+		void SetupParticle(const DirectX::XMFLOAT3& minXYZ, const DirectX::XMFLOAT3& maxXYZ, const DirectX::XMFLOAT3& minDir, const DirectX::XMFLOAT3& maxDir, const DirectX::XMFLOAT3& startColor, const DirectX::XMFLOAT3& endColor, float minSpeed, float maxSpeed, float lifeTime, float spawnRate);
+		void SetupStateMachine();
 
 		Entity* GetEntity();
 		Scene* GetScene();
@@ -113,11 +133,13 @@ namespace nam
 		void Destroy();
 
 		template<typename T>
-		void SetFunctionUpdate(T* owner, void (T::* Update)());
+		void SetupFunctionUpdate(T* owner, void (T::* Update)());
 		template<typename T>
-		void SetBoxCollider(T* owner, void(T::* Collide)(u32 self, u32 other, const CollisionInfo& collisionInfo));
+		void SetupBoxCollider(T* owner, void(T::* Collide)(u32 self, u32 other, const CollisionInfo& collisionInfo));
 		template<typename T>
-		void SetSphereCollider(T* owner, void(T::* Collide)(u32 self, u32 other, const CollisionInfo& collisionInfo));
+		void SetupSphereCollider(T* owner, void(T::* Collide)(u32 self, u32 other, const CollisionInfo& collisionInfo));
+		template<typename T>
+		void SetupButton(T* owner, void(T::* Hovered)(), void(T::* Click)(), void(T::* Left)());
 
 		friend class App;
 		friend class Scene;

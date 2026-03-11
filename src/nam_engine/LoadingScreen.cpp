@@ -28,7 +28,7 @@ namespace nam
 		m_waitingTimer.Init(0.1f);
 		m_fadingTimer.Init(m_fadingSpeed);
 
-		SetBehavior();
+		SetupBehavior();
 	}
 
 	void LoadingScreen::OnStart()

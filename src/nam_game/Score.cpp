@@ -9,25 +9,14 @@ Score::Score()
 void Score::OnInit()
 {
 	m_timer.Init(1.f);
-
 	m_score = 0;
-
-	TextRendererComponent textRender;
-
-	Text* p_text = textRender.CreateTextInstance();
-
-	p_text->SetDatas({ 40, 40 }, 0.5f, { 1, 1, 1, 1 });
-	p_text->SetText("Score : ");
-
-	p_text->SetTexture(_FontPusab);
-	p_text->SetToDynamic(MAX_TEXT_VERTICES, MAX_TEXT_INDICES);
 
 	XMFLOAT3 pos = { 20, 20, 0 };
 	SetWorldPosition(pos);
-	AddComponent(textRender);
+	SetupText(XMFLOAT2(40, 40), 0.5f, { 1.f, 1.f, 1.f, 1.f });
 	mp_textRender = &GetComponent<TextRendererComponent>();
 
-	SetBehavior();
+	SetupBehavior();
 	SetTag((int)Tag::_None);
 }
 
@@ -49,9 +38,7 @@ void Score::OnUpdate()
 		IncreaseScore(1);
 	}
 
-	std::string toDisplay = "Score : " + std::to_string(m_score);
-	mp_textRender->mp_text->SetText(toDisplay);
-	mp_textRender->mp_text->MakeRainbowVertices();
+	mp_textRender->SetTextPrint("Score : " + std::to_string(m_score), true);
 }
 
 void Score::OnDestroy()

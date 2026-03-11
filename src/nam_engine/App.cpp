@@ -263,12 +263,13 @@ namespace nam
 		mp_camera->m_entity = m_ecs.CreateEntity();
 		mp_camera->mp_scene = nullptr;
 
+		mp_camera->SetupTransform(XMFLOAT3(0.f, 0.f, 0.f));
+
 		mp_camera->Start();
 	}
 
 	void App::StartCamera()
 	{
-		mp_camera->AddComponent(TransformComponent());
 		mp_camera->AddComponent(CameraComponent());
 	}
 

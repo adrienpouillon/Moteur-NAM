@@ -12,7 +12,7 @@ Camera::Camera()
 void Camera::OnInit()
 {
 	mp_appCamera = nullptr;
-	SetBehavior();
+	SetupBehavior();
 	SetTag((int)Tag::_Camera);
 }
 
