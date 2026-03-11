@@ -17,6 +17,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR cmdLine, i
 	Light* p_sun = app->GetLightManager().CreateLight();
 	p_sun->SetToDirectionalLight(0.75f, { 0, -1, 0 }, { 1, 1, 1 });
 	
+
 	CaveScene caveScene;
 	caveScene.Init();
 	WrappedSceneManager::Add(&caveScene);
