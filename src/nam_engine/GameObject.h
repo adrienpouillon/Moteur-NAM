@@ -125,6 +125,8 @@ namespace nam
 		void SetupStateMachine(int stateCount);
 		void SetupLight(Light* light);
 
+		void SetupPhysic(const DirectX::XMFLOAT3& velocity, bool useGravity, float masse = 1.f);
+
 		Entity* GetEntity();
 		Scene* GetScene();
 

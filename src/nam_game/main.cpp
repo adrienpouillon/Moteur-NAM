@@ -82,11 +82,12 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR cmdLine, i
 				XMFLOAT3 pos = XMFLOAT3(10.f, 1.f, 5.f);
 
 				Light* light = app->CreateEmptyLight();
-				light->SetToPointLight(0.25f, pos, 5.f, { 1, 1, 1 });
+				light->SetToPointLight(0.5f, pos, 5.f, { 1, 1, 1 });
 
 				enemy2->SetupSphereCollider();
 				enemy2->SetWorldPosition(pos);
 				enemy2->SetupMesh(mesh);
+				enemy2->SetupPhysic({1.f, 0.f, 0.f}, true, 1.f);
 			}
 
 			//creation floor

@@ -545,6 +545,25 @@ namespace nam
 		}
 	}
 
+	void GameObject::SetupPhysic(const XMFLOAT3& velocity, bool useGravity, float masse)
+	{
+		if (HasComponent<PhysicComponent>() == false)
+		{
+			PhysicComponent physic;
+			physic.m_velocity = velocity;
+			physic.m_useGravity = useGravity;
+			physic.m_mass = masse;
+			AddComponent(physic);
+		}
+		else
+		{
+			PhysicComponent& physic = GetComponent<PhysicComponent>();
+			physic.m_velocity = velocity;
+			physic.m_useGravity = useGravity;
+			physic.m_mass = masse;
+		}
+	}
+
 	Entity* GameObject::GetEntity()
 	{
 		return &m_entity;
