@@ -40,13 +40,13 @@ namespace nam
 
 		void DestroyGameObject(GameObject* gameObject);
 
-		void SetActiveEntity(Entity& entity, bool active);
+		void SetActiveEntity(const Entity& entity, bool active);
 
 		void SetActiveAllEntity(bool active);
 
 	protected:
 
-		void DestroyEntity(Entity& entity);
+		void DestroyEntity(const Entity& entity);
 		void DestroyAllGameObject();
 
 		void SetAllGameObjectInAllScene(UnMap<u32, GameObject*>* allGameObjectInAllScene);
@@ -54,7 +54,7 @@ namespace nam
 	public:
 
 		const Entity GetEntity(uint32_t idEntity);
-		GameObject* GetGameObject(Entity& entity);
+		GameObject* GetGameObject(const Entity& entity);
 		GameObject* GetGameObject(uint32_t idEntity);
 
 		const UnMap<u32, GameObject*>& GetAllGameObject() const;

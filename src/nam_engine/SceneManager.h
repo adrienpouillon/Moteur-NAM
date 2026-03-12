@@ -59,7 +59,7 @@ namespace nam
 
 		Scene* GetSceneByTag(size sceneTag);
 		Scene* GetScene(u32 idScene);
-		GameObject* GetGameObjectInGame(Entity& entity);
+		GameObject* GetGameObjectInGame(const Entity& entity);
 		GameObject* GetGameObjectInGame(u32 idEntity);
 
 		const UnMap<u32, Scene*>& GetAllScene() const;

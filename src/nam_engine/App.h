@@ -1,7 +1,6 @@
 #pragma once
 #include "Ecs.h"
 #include "SceneManager.h"
-#include "AppChrono.h"
 #include "Entity.h"
 #include "Window.h"
 
@@ -13,6 +12,7 @@ namespace nam
 	class Scene;
 	class LightManager;
 	class GameObject;
+	class Make;
   
 	struct Mesh;
 	struct Sprite;
@@ -24,18 +24,21 @@ namespace nam
 	{
 	private:
 		static App* msp_instance;
-		Window m_window;
+
 		Ecs m_ecs;
 		SceneManager m_sceneManager;
-
-		GameObject* mp_camera = nullptr;
+		Window m_window;
 		AppChrono m_chrono;
-		RenderManager* mp_renderManager = nullptr;
+		RenderManager* mp_renderManager;
+		Make* m_make;
 
-		bool m_minimized = false;
-		bool m_maximized = false;
-		bool m_resizing = false;
-		bool m_fullscreen = false;
+		GameObject* mp_camera;
+		LoadingScreen* mp_loadingScreen;
+		
+		bool m_minimized;
+		bool m_maximized;
+		bool m_resizing;
+		bool m_fullscreen;
 
 		struct TextureData
 		{
@@ -43,9 +46,10 @@ namespace nam
 			size m_uniqueTag = 0;
 			bool m_usingTextureFolder = false;
 		};
-
 		Vector<TextureData> m_texturesDataToLoad;
-		LoadingScreen* mp_loadingScreen = nullptr;
+
+	private:
+		App(HINSTANCE hInst, int startWindowWidth, int startWindowHeight);
 	public:
 		~App();
 
@@ -53,33 +57,30 @@ namespace nam
 		static App* Get(HINSTANCE hInst = 0, int startWindowWidth = -1, int startWindowHeight = -1);
 		static void Destroy();
 
-		LRESULT MsgProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
-
 		void Init();
 		void Start();
 		void Run();
-
-		// To call before Run() | if usingTextureFolder true -> the path will remains in the Textures Folder
-		void LoadTexture(std::wstring path, size uniqueTag, bool usingTextureFolder = false);
 
 		int MainLoop();
 		void Update();
 		void Resize();
 
-		void ToggleDebugConsole(bool state);
-		
+	private:
 		void CreateCamera();
 		void StartCamera();
 		void CameraDefaultSettings(); 
 
+		void ToggleDebugConsole(bool state);
+	public:
+
 		/*template<typename Component>
-		void AddComponent(Entity& entity, const Component& data);
+		void AddComponent(const Entity& entity, const Component& data);
 		//template<typename Component>
 		//void RemoveComponent();
 		template<typename Component>
-		const bool HasComponent(Entity& entity) const;
+		const bool HasComponent(const Entity& entity) const;
 		template<typename Component>
-		Component& GetComponent(Entity& entity);*/
+		Component& GetComponent(const Entity& entity);
 
 		template<typename System, typename... Args>
 		void AddSystem(Args&&... args);
@@ -87,6 +88,11 @@ namespace nam
 		//void RemoveSystem();
 		template<typename System>
 		void SetSystemEnabled(const bool enabled);
+
+		template<typename... Components, typename Func>
+		void ForEach(Func&& func);
+		template<typename... Components, typename Func>
+		void DoubleForEach(Func&& func);
 
 		template<typename T>
 		T* CreateGameObject(Scene* scene);
@@ -96,14 +102,14 @@ namespace nam
 		void DestroyGameObject(GameObject* gameObject, u32 idScene);
 		void SetActiveGameObject(Scene* scene, GameObject* gameObject, bool active);
 		void SetActiveGameObject(u32 idScene, GameObject* gameObject, bool active);
-		void SetActiveEntity(Scene* scene, Entity& entity, bool active);
-		void SetActiveEntity(u32 idScene, Entity& entity, bool active);
+		void SetActiveEntity(Scene* scene, const Entity& entity, bool active);
+		void SetActiveEntity(u32 idScene, const Entity& entity, bool active);
 		GameObject* GetGameObject(Scene* scene, u32 idEntity);
-		GameObject* GetGameObject(Scene* scene, Entity& entity);
+		GameObject* GetGameObject(Scene* scene, const Entity& entity);
 		GameObject* GetGameObject(u32 idScene, u32 idEntity);
-		GameObject* GetGameObject(u32 idScene, Entity& entity);
+		GameObject* GetGameObject(u32 idScene, const Entity& entity);
 		GameObject* GetGameObject(u32 idEntity);
-		GameObject* GetGameObject(Entity& entity);
+		GameObject* GetGameObject(const Entity& entity);
 
 		Scene* CreateScene(size sceneTag);
 		void DestroyScene(Scene* scene);
@@ -134,24 +140,33 @@ namespace nam
 		Light* GetLight(u8 lightID);
 
 		Scene* GetScene(u32 idScene);
-		Scene* GetScene(Entity& entity);
+		Scene* GetScene(const Entity& entity);
 
-		Ecs& GetEcs();
-		SceneManager& GetSceneManager();
+		const float GetRealDeltaTime() const;
+		const float GetScaledDeltaTime() const;
+		*/
+		// To call before Run() | if usingTextureFolder true -> the path will remains in the Textures Folder
+		void LoadTexture(std::wstring path, size uniqueTag, bool usingTextureFolder = false);
     
 		Window& GetWindow();
-
-		AppChrono& GetChrono();
 		GameObject* GetCamera();
 
-		LightManager& GetLightManager();
-	private:
-		App(HINSTANCE hInst, int startWindowWidth, int startWindowHeight);
+		//Ecs& GetEcs();
+		SceneManager& GetSceneManager();
 
+		AppChrono& GetChrono();
+
+		LightManager& GetLightManager();
+
+		LRESULT MsgProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
+	private:
 		void RenderFirstFrame();
 		void LoadTextures();
 
+		Ecs& GetEcs();
+
 		friend class GameObject;
+		friend class Make;
 	};
 }
 

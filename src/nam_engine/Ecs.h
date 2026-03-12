@@ -36,9 +36,9 @@ namespace nam
         void CleanUpdate();
 
         Entity CreateEntity();
-        void DestroyEntity(Entity& entity);
-        void SetEntityActive(Entity& entity, bool active);
-        bool IsEntityAlive(Entity& entity) const;
+        void DestroyEntity(const Entity& entity);
+        void SetEntityActive(const Entity& entity, bool active);
+        bool IsEntityAlive(const Entity& entity) const;
         bool IsEntityActive(u32 entityId) const;
 
         template<typename System, typename... Args>
@@ -47,15 +47,15 @@ namespace nam
         void SetSystemEnabled(const bool enabled);
 
         template<typename Component>
-        void AddComponent(Entity& entity, const Component& data);
+        void AddComponent(const Entity& entity, const Component& data);
 
         template<typename Component>
-        Component& GetComponent(Entity& entity);
+        Component& GetComponent(const Entity& entity);
         template<typename Component>
         Component& GetComponent(u32 entityId);
 
         template<typename Component>
-        bool HasComponent(Entity& entity);
+        bool HasComponent(const Entity& entity);
         template<typename Component>
         bool HasComponent(u32 entityId);
         

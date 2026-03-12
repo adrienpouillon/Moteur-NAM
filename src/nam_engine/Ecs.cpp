@@ -47,7 +47,7 @@ namespace nam
         return entity;
     }
 
-    void Ecs::DestroyEntity(Entity& entity)
+    void Ecs::DestroyEntity(const Entity& entity)
     {
         if (IsEntityAlive(entity))
         {
@@ -55,7 +55,7 @@ namespace nam
         }
     }
 
-    void Ecs::SetEntityActive(Entity& entity, bool active)
+    void Ecs::SetEntityActive(const Entity& entity, bool active)
     {
         if (active)
             m_entitiesActive.Add(entity.m_id, 1);
@@ -68,7 +68,7 @@ namespace nam
         }
     }
 
-    bool Ecs::IsEntityAlive(Entity& entity) const
+    bool Ecs::IsEntityAlive(const Entity& entity) const
     {
         if (!m_entitiesAlive.Has(entity.m_id)) return false;
         return m_entitiesAlive.Get(entity.m_id) == entity.m_generation;

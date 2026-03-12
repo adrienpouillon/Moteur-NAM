@@ -61,6 +61,7 @@
 #include "Scene.h"
 #include "SceneManager.h"
 #include "App.h"
+#include "Make.h"
 
 #include "Mesh.h"
 #include "Sprite.h"

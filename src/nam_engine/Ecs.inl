@@ -25,7 +25,7 @@ namespace nam
     }
 
     template<typename Component>
-    inline void Ecs::AddComponent(Entity& entity, const Component& data)
+    inline void Ecs::AddComponent(const Entity& entity, const Component& data)
     {
         assert(IsEntityAlive(entity) && "operation on dead entity");
         GetSet<Component>().Add(entity.m_id, data);
@@ -33,7 +33,7 @@ namespace nam
     }
 
     template<typename Component>
-    inline Component& Ecs::GetComponent(Entity& entity)
+    inline Component& Ecs::GetComponent(const Entity& entity)
     {
         assert(IsEntityAlive(entity) && "operation on dead entity");
         assert(HasComponent<Component>(entity.m_id) && "entity doesn't have the component");
@@ -47,7 +47,7 @@ namespace nam
     }
 
     template<typename Component>
-    inline bool Ecs::HasComponent(Entity& entity)
+    inline bool Ecs::HasComponent(const Entity& entity)
     {
         assert(IsEntityAlive(entity) && "operation on dead entity");
         return HasComponent<Component>(entity.m_id);

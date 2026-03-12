@@ -2,8 +2,6 @@
 
 namespace nam
 {
-	class AppChrono;
-
 	class Timer
 	{
 		float m_targetTime = -1.f;

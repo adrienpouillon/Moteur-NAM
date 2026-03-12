@@ -78,7 +78,7 @@ namespace nam
 		}
 	}
 
-	void Scene::SetActiveEntity(Entity& entity, bool active)
+	void Scene::SetActiveEntity(const Entity& entity, bool active)
 	{
 		mp_ecs->SetEntityActive(entity, active);
 		if (active)
@@ -104,7 +104,7 @@ namespace nam
 
 //protected
 
-	void Scene::DestroyEntity(Entity& entity)
+	void Scene::DestroyEntity(const Entity& entity)
 	{
 		uint32_t id = entity.m_id;
 		if (mp_ecs->IsEntityActive(id) == false)
@@ -145,7 +145,7 @@ namespace nam
 		return Entity();
 	}
 
-	GameObject* Scene::GetGameObject(Entity& entity)
+	GameObject* Scene::GetGameObject(const Entity& entity)
 	{
 		auto it = m_allGameObject.find(entity.m_id);
 		if (it != m_allGameObject.end())

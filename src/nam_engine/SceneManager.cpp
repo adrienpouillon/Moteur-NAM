@@ -207,7 +207,7 @@ namespace nam
 		return nullptr;
 	}
 
-	GameObject* SceneManager::GetGameObjectInGame(Entity& entity)
+	GameObject* SceneManager::GetGameObjectInGame(const Entity& entity)
 	{
 		auto it = m_allGameObjectInAllScene.find(entity.m_id);
 		if (it != m_allGameObjectInAllScene.end())

@@ -19,30 +19,30 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR cmdLine, i
 	//start game
 	{
 		//system
-		//app->AddSystem<...>();
+		//Make::AddSystem<...>();
 
-		app->LoadTexture(L"yellow.dds", _Yellow, true);
-		app->LoadTexture(L"rainbow.dds", _Rainbow, true);
-		app->LoadTexture(L"stone.dds", _Stone, true);
+		Make::LoadTexture(L"yellow.dds", _Yellow, true);
+		Make::LoadTexture(L"rainbow.dds", _Rainbow, true);
+		Make::LoadTexture(L"stone.dds", _Stone, true);
 
-		app->LoadTexture(L"crepit.dds", _Crepit, true);
-		app->LoadTexture(L"tuile.dds", _Tuile, true);
-		app->LoadTexture(L"heart.dds", _Heart, true);
-		app->LoadTexture(L"grass.dds", _Grass, true);
+		Make::LoadTexture(L"crepit.dds", _Crepit, true);
+		Make::LoadTexture(L"tuile.dds", _Tuile, true);
+		Make::LoadTexture(L"heart.dds", _Heart, true);
+		Make::LoadTexture(L"grass.dds", _Grass, true);
 
 		GameObject* appCamera = app->GetCamera();
 
 		//creation caveScene
-		Scene* caveScene = app->CreateScene(0);
+		Scene* caveScene = Make::CreateScene(0);
 		{
 			//initialisation des objets
-			Light* p_sun = app->CreateEmptyLight();
+			Light* p_sun = Make::CreateEmptyLight();
 			p_sun->SetToDirectionalLight(0.75f, { 0, -1, 0 }, { 1, 1, 1 });
 
 			//creation player
 			Player* player = caveScene->CreateGameObject<Player>();
 			{
-				Mesh* mesh = app->CreateEmptyMesh();
+				Mesh* mesh = Make::CreateEmptyMesh();
 				mesh->BuildCylinder(0.5f, 20, 1.f, { 1.f,1.f,1.f,1.f });
 				mesh->SetTexture(_Stone);
 
@@ -55,14 +55,14 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR cmdLine, i
 			//creation enemy
 			Enemy* enemy = caveScene->CreateGameObject<Enemy>();
 			{
-				Mesh* mesh = app->CreateEmptyMesh();
+				Mesh* mesh = Make::CreateEmptyMesh();
 				mesh->BuildUvSphere(1.f, 20, 20, { 1, 1, 1, 1 });
 				mesh->MakeRainbowVertices();
 				mesh->SetTexture(_Stone);
 
 				XMFLOAT3 pos = XMFLOAT3( 10.f, 1.f, -5.f);
 
-				Light* light = app->CreateEmptyLight();
+				Light* light = Make::CreateEmptyLight();
 				light->SetToPointLight(1.f, pos, 5.f, { 1, 1, 1 });
 
 				enemy->SetupSphereCollider();
@@ -74,26 +74,22 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR cmdLine, i
 			//creation enemy
 			Enemy* enemy2 = caveScene->CreateGameObject<Enemy>();
 			{
-				Mesh* mesh = app->CreateEmptyMesh();
+				Mesh* mesh = Make::CreateEmptyMesh();
 				mesh->BuildCube(1.f, { 1, 1, 1, 1 });
 				mesh->MakeRainbowVertices();
 				mesh->SetTexture(_Stone);
 
 				XMFLOAT3 pos = XMFLOAT3(10.f, 1.f, 5.f);
 
-				Light* light = app->CreateEmptyLight();
-				light->SetToPointLight(0.5f, pos, 5.f, { 1, 1, 1 });
-
 				enemy2->SetupSphereCollider();
 				enemy2->SetWorldPosition(pos);
 				enemy2->SetupMesh(mesh);
-				enemy2->SetupPhysic({1.f, 0.f, 0.f}, true, 1.f);
 			}
 
 			//creation floor
 			GameObject* floor = caveScene->CreateGameObject<GameObject>();
 			{
-				Mesh* mesh = app->CreateEmptyMesh();
+				Mesh* mesh = Make::CreateEmptyMesh();
 				mesh->BuildPlane(XMFLOAT2(50.f, 50.f), { 1,1,1,1 }, true);
 				mesh->SetTexture(_Grass);
 
@@ -146,7 +142,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR cmdLine, i
 				XMFLOAT3 ypr = { 0, 0, DirectX::XM_PIDIV4 };
 				button->SetWorldYPR(ypr);
 				
-				Sprite* sprite = app->CreateEmptySprite();
+				Sprite* sprite = Make::CreateEmptySprite();
 				sprite->BuildRect({200 ,100},{1,1,1,1});
 				sprite->SetTexture(_Yellow);
 
@@ -156,7 +152,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR cmdLine, i
 
 			//lancer
 			caveScene->Start();
-			app->AddCurrentScene(caveScene);
+			Make::AddCurrentScene(caveScene);
 		}
 	}
 
