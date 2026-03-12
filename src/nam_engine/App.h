@@ -130,6 +130,9 @@ namespace nam
 		//After that, Use the SetTextInstance in the TextRendererComponent
 		Text* CreateEmptyText();
 
+		Light* CreateEmptyLight();
+		Light* GetLight(u8 lightID);
+
 		Scene* GetScene(u32 idScene);
 		Scene* GetScene(Entity& entity);
 

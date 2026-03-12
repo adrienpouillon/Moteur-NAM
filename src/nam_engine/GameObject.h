@@ -13,6 +13,9 @@ namespace nam
 		int m_tag;
 		TransformComponent* mp_transform;
 		bool m_canDeleteMesh;
+		bool m_canDeleteSprite;
+		bool m_canDeleteText;
+		StateMachineComponent* m_stateMachine;
 	public:
 
 		GameObject();
@@ -32,6 +35,7 @@ namespace nam
 		virtual void OnHovered();
 		virtual void OnClick();
 		virtual void OnLeft();
+		virtual void OnInitStateMachine(StateMachineComponent* sM);
 
 
 		void SetActiveEntity(bool active);
@@ -97,6 +101,8 @@ namespace nam
 		void LookAtWorld(const DirectX::XMFLOAT3& target);
 
 		void ActiveDeleteMesh(bool isActive);
+		void ActiveDeleteSprite(bool isActive);
+		void ActiveDeleteText(bool isActive);
 
 	private:
 		void SetupTransform(const DirectX::XMFLOAT3& pos);
@@ -116,7 +122,8 @@ namespace nam
 		void SetupButton();
 
 		void SetupParticle(const DirectX::XMFLOAT3& minXYZ, const DirectX::XMFLOAT3& maxXYZ, const DirectX::XMFLOAT3& minDir, const DirectX::XMFLOAT3& maxDir, const DirectX::XMFLOAT3& startColor, const DirectX::XMFLOAT3& endColor, float minSpeed, float maxSpeed, float lifeTime, float spawnRate);
-		void SetupStateMachine();
+		void SetupStateMachine(int stateCount);
+		void SetupLight(Light* light);
 
 		Entity* GetEntity();
 		Scene* GetScene();

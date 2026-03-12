@@ -9,7 +9,6 @@ namespace nam
 	Light* LightComponent::CreateLightInstance()
 	{
 		mp_light = Render->GetLightManager().CreateLight();
-
 		return mp_light;
 	}
 	void LightComponent::SetLightInstance(Light* p_light)

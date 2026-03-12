@@ -3,7 +3,7 @@
 
 namespace nam
 {
-	void Light::SetToDirectionalLight(float intensity, DirectX::XMFLOAT3 direction, DirectX::XMFLOAT3 color)
+	void Light::SetToDirectionalLight(float intensity, const DirectX::XMFLOAT3& direction, const DirectX::XMFLOAT3& color)
 	{
 		Reset();
 		m_type = LightType::_Directionnal;
@@ -13,7 +13,7 @@ namespace nam
 		m_color = color;
 	}
 
-	void Light::SetToPointLight(float intensity, DirectX::XMFLOAT3 position, float range, DirectX::XMFLOAT3 color)
+	void Light::SetToPointLight(float intensity, const DirectX::XMFLOAT3& position, float range, const DirectX::XMFLOAT3& color)
 	{
 		Reset();
 		m_type = LightType::_Point;
@@ -24,7 +24,7 @@ namespace nam
 		m_color = color;
 	}
 
-	void Light::SetToSpotLight(float intensity, DirectX::XMFLOAT3 position, float range, DirectX::XMFLOAT3 direction, float beginAngleRad, float endAngleRad, DirectX::XMFLOAT3 color)
+	void Light::SetToSpotLight(float intensity, const DirectX::XMFLOAT3& position, float range, const DirectX::XMFLOAT3& direction, float beginAngleRad, float endAngleRad, const DirectX::XMFLOAT3& color)
 	{
 		Reset();
 		m_type = LightType::_Spot;
@@ -36,6 +36,21 @@ namespace nam
 		m_beginAngleRad = beginAngleRad;
 		m_endAngleRad = endAngleRad;
 	
+		m_color = color;
+	}
+
+	void Light::SetPosition(const DirectX::XMFLOAT3& pos)
+	{
+		m_position = pos;
+	}
+
+	void Light::SetIntensity(float intensity)
+	{
+		m_intensity = intensity;
+	}
+
+	void Light::SetColor(const DirectX::XMFLOAT3& color)
+	{
 		m_color = color;
 	}
 

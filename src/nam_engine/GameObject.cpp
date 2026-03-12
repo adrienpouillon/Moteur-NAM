@@ -10,8 +10,13 @@ namespace nam
 		mp_scene = nullptr;
 		m_entity = Entity();
 		m_tag = -1;
+
 		mp_transform = nullptr;
+		m_stateMachine = nullptr;
+
 		m_canDeleteMesh = false;
+		m_canDeleteSprite = false;
+		m_canDeleteText = false;
 	}
 
 	void GameObject::Init(Scene* scene, Entity entity)
@@ -19,7 +24,10 @@ namespace nam
 		App* app = App::Get();
 		mp_scene = scene;
 		m_entity = entity;
+
 		m_canDeleteMesh = false;
+		m_canDeleteSprite = false;
+		m_canDeleteText = false;
 
 		SetupTransform(XMFLOAT3(0.f, 0.f, 0.f));
 
@@ -65,7 +73,21 @@ namespace nam
 		{
 			MeshRendererComponent& meshRenderer = GetComponent<MeshRendererComponent>();
 			meshRenderer.DeleteMeshInstance();
-			
+		}
+		if (m_canDeleteSprite && HasComponent<SpriteRendererComponent>())
+		{
+			SpriteRendererComponent& spriteRenderer = GetComponent<SpriteRendererComponent>();
+			spriteRenderer.DeleteSpriteInstance();
+		}
+		if (m_canDeleteText && HasComponent<TextRendererComponent>())
+		{
+			TextRendererComponent& textRenderer = GetComponent<TextRendererComponent>();
+			textRenderer.DeleteTextInstance();
+		}
+
+		if (m_stateMachine != nullptr)
+		{
+			delete m_stateMachine;
 		}
 
 		mp_scene->DestroyEntity(m_entity);
@@ -99,14 +121,22 @@ namespace nam
 
 	void GameObject::OnHovered()
 	{
+
 	}
 
 	void GameObject::OnClick()
 	{
+
 	}
 
 	void GameObject::OnLeft()
 	{
+
+	}
+
+	void GameObject::OnInitStateMachine(StateMachineComponent* sM)
+	{
+
 	}
 
 	void GameObject::SetActiveEntity(bool active)
@@ -343,6 +373,16 @@ namespace nam
 		m_canDeleteMesh = isActive;
 	}
 
+	void GameObject::ActiveDeleteSprite(bool isActive)
+	{
+		m_canDeleteSprite = isActive;
+	}
+
+	void GameObject::ActiveDeleteText(bool isActive)
+	{
+		m_canDeleteText = isActive;
+	}
+
 	void GameObject::SetupTransform(const XMFLOAT3& pos)
 	{
 		TransformComponent transform = TransformComponent();
@@ -478,14 +518,30 @@ namespace nam
 	{
 		if (HasComponent<StateMachineComponent>() == false)
 		{
-			StateMachineComponent stateMachine = StateMachineComponent(this, stateCount);
-			stateMachine;
+			StateMachineComponent* stateMachine = new StateMachineComponent(this, stateCount);
+			OnInitStateMachine(stateMachine);
 			AddComponent(stateMachine);
+			m_stateMachine = stateMachine;
 		}
 		else
 		{
 			StateMachineComponent& stateMachine = GetComponent<StateMachineComponent>();
-			stateMachine.AddEmiter(maxXYZ, minXYZ, maxDir, minDir, startColor, endColor, maxSpeed, minSpeed, lifeTime, spawnRate);
+			OnInitStateMachine(&stateMachine);
+		}
+	}
+
+	void GameObject::SetupLight(Light* light)
+	{
+		if (HasComponent<LightComponent>() == false)
+		{
+			LightComponent lightC;
+			lightC.SetLightInstance(light);
+			AddComponent(lightC);
+		}
+		else
+		{
+			LightComponent& lightC = GetComponent<LightComponent>();
+			lightC.SetLightInstance(light);
 		}
 	}
 

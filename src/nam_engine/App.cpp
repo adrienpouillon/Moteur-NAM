@@ -473,12 +473,22 @@ namespace nam
 
 	Sprite* App::CreateEmptySprite()
 	{
-		return Render->GetRenderItemManager().CreateRenderItem<Sprite>();;
+		return Render->GetRenderItemManager().CreateRenderItem<Sprite>();
 	}
 
 	Text* App::CreateEmptyText()
 	{
-		return Render->GetRenderItemManager().CreateRenderItem<Text>();;
+		return Render->GetRenderItemManager().CreateRenderItem<Text>();
+	}
+
+	Light* App::CreateEmptyLight()
+	{
+		return Render->GetLightManager().CreateLight();
+	}
+
+	Light* App::GetLight(u8 lightID)
+	{
+		return Render->GetLightManager().GetLight(lightID);
 	}
 
 	LightManager& App::GetLightManager()

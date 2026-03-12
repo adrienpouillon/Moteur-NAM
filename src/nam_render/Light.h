@@ -10,8 +10,9 @@ namespace nam
         _Spot,
     };
 
-    struct Light
+    class Light
     {
+    public:
         LightType m_type = LightType::_Directionnal;
         DirectX::XMFLOAT3 m_color = { 1, 1, 1 };
 
@@ -27,10 +28,14 @@ namespace nam
         float m_intensity = 0;
 
     public: 
-        void SetToDirectionalLight(float intensity, DirectX::XMFLOAT3 direction, DirectX::XMFLOAT3 color);
-        void SetToPointLight(float intensity, DirectX::XMFLOAT3 position, float range, DirectX::XMFLOAT3 color);
-        void SetToSpotLight(float intensity, DirectX::XMFLOAT3 position, float range, DirectX::XMFLOAT3 direction, float beginAngleRad, float endAngleRad, DirectX::XMFLOAT3 color);
+        void SetToDirectionalLight(float intensity, const DirectX::XMFLOAT3& direction, const DirectX::XMFLOAT3& color);
+        void SetToPointLight(float intensity, const DirectX::XMFLOAT3& position, float range, const DirectX::XMFLOAT3& color);
+        void SetToSpotLight(float intensity, const DirectX::XMFLOAT3& position, float range, const DirectX::XMFLOAT3& direction, float beginAngleRad, float endAngleRad, const DirectX::XMFLOAT3& color);
       
+        void SetPosition(const DirectX::XMFLOAT3& pos);
+        void SetIntensity(float intensity);
+        void SetColor(const DirectX::XMFLOAT3& color);
+
         //DO NOT USE IN GAMEPLAY
         void SetByTransform(TransformComponent& transform);
 

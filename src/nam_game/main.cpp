@@ -36,7 +36,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR cmdLine, i
 		Scene* caveScene = app->CreateScene(0);
 		{
 			//initialisation des objets
-			Light* p_sun = app->GetLightManager().CreateLight();
+			Light* p_sun = app->CreateEmptyLight();
 			p_sun->SetToDirectionalLight(0.75f, { 0, -1, 0 }, { 1, 1, 1 });
 
 			//creation player
@@ -53,7 +53,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR cmdLine, i
 			}
 
 			//creation enemy
-			GameObject* enemy = caveScene->CreateGameObject<GameObject>();
+			Enemy* enemy = caveScene->CreateGameObject<Enemy>();
 			{
 				Mesh* mesh = app->CreateEmptyMesh();
 				mesh->BuildUvSphere(1.f, 20, 20, { 1, 1, 1, 1 });
@@ -62,13 +62,17 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR cmdLine, i
 
 				XMFLOAT3 pos = XMFLOAT3( 10.f, 1.f, -5.f);
 
+				Light* light = app->CreateEmptyLight();
+				light->SetToPointLight(1.f, pos, 5.f, { 1, 1, 1 });
+
 				enemy->SetupSphereCollider();
 				enemy->SetWorldPosition(pos);
 				enemy->SetupMesh(mesh);
+				enemy->SetupLight(light);
 			}
 
 			//creation enemy
-			GameObject* enemy2 = caveScene->CreateGameObject<GameObject>();
+			Enemy* enemy2 = caveScene->CreateGameObject<Enemy>();
 			{
 				Mesh* mesh = app->CreateEmptyMesh();
 				mesh->BuildCube(1.f, { 1, 1, 1, 1 });
@@ -76,6 +80,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR cmdLine, i
 				mesh->SetTexture(_Stone);
 
 				XMFLOAT3 pos = XMFLOAT3(10.f, 1.f, 5.f);
+
+				Light* light = app->CreateEmptyLight();
+				light->SetToPointLight(0.25f, pos, 5.f, { 1, 1, 1 });
 
 				enemy2->SetupSphereCollider();
 				enemy2->SetWorldPosition(pos);
