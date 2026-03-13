@@ -1,9 +1,5 @@
 #pragma once
 
-#include <DirectXMath.h>
-#include "Common/MathHelper.h"
-#include "LightManager.h"
-
 namespace nam
 {
     struct CBufferObj3D

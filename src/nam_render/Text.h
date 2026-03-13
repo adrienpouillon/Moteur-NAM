@@ -1,6 +1,4 @@
 #pragma once
-#include "ARenderItem.h"
-#include <BaseTypes.h>
 
 constexpr int MAX_CHARS = 256;
 

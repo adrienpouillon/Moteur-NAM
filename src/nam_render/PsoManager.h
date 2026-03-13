@@ -1,11 +1,4 @@
 #pragma once
-#include "PipelineStateBuilder.h"
-#include "Shader.h"
-#include "InputLayout.h"
-#include "RootSignature.h"
-
-#include "ContainerHash.h"
-#include "RootSignatureName.h"
 
 namespace nam
 {

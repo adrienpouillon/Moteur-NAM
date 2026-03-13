@@ -1,5 +1,4 @@
 #pragma once
-#include "Common/d3dUtil.h"
 
 struct ID3D12CommandQueue;
 struct ID3D12CommandAllocator;

@@ -1,7 +1,4 @@
 #pragma once
-#include "RenderManager.h"
-#include "Common/d3dx12.h"
-#include "CommandManager.h"
 
 namespace nam
 {

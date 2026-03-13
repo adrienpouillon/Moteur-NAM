@@ -1,7 +1,4 @@
 #pragma once
-#include <string>
-#include <d3dcommon.h>
-#include <wrl.h>
 
 #define PATH_SHADER_TEXTURE_3D L"../../src/nam_render/Shaders/texture.hlsl"
 #define PATH_SHADER_TEXTURE_2D L"../../src/nam_render/Shaders/texture2D.hlsl"

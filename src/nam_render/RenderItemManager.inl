@@ -1,5 +1,5 @@
-#include "RenderItemManager.h"
 #pragma once
+#include "RenderItemManager.h"
 
 namespace nam
 {

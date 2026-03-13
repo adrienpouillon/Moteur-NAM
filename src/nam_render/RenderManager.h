@@ -1,23 +1,4 @@
 #pragma once
-#include "DataShader.h"
-#include "DescriptoHeapsWrapper.h"
-#include "Common/d3dUtil.h"
-
-#include "RootSignature.h"
-#include "InputLayout.h"
-#include "Shader.h"
-
-#include "PipelineStateBuilder.h"
-#include "PsoManager.h"
-
-#include "ConstantBuffersDatas.h"
-#include "TextureManager.h"
-#include "LightManager.h"
-#include "RenderItemManager.h"
-
-#include "DebugLog.h"
-
-#include <Benchmark.h>
  
 #define Render RenderManager::Get()
 

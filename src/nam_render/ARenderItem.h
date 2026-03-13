@@ -1,9 +1,4 @@
 #pragma once
-#include "Vertex.h"
-#include "Common/d3dUtil.h"
-#include "PipelineStateBuilder.h"
-
-#include <BaseTypes.h>
 
 namespace nam
 {

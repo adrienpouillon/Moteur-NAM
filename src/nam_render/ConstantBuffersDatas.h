@@ -1,6 +1,4 @@
 #pragma once
-#include "Common/UploadBuffer.h"
-#include "DataShader.h"
 
 namespace nam
 {

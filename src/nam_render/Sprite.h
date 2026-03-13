@@ -1,5 +1,4 @@
 #pragma once
-#include "ARenderItem.h"
 
 namespace nam
 {

@@ -1,8 +1,5 @@
 #include "pch.h"
 #include "ObjParser.h"
-#include "Vertex.h"
-
-#include "Mesh.h"
 
 using namespace DirectX;
 

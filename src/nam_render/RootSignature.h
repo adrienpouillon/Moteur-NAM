@@ -1,9 +1,4 @@
 #pragma once
-#include "Common/d3dx12.h"
-#include <ContainerSequential.h>
-#include <BaseTypes.h>
-
-#include "Constants.h"
 
 //0 -> b0 = cbufferPerObj
 //1 -> b1 = cbufferPerFrame

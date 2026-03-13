@@ -1,7 +1,4 @@
 #include "pch.h"
-#include "ParticleManager.h"
-#include "RenderWrapper.h"
-#include "CommandManager.h"
 
 namespace nam
 {

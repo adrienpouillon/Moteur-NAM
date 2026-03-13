@@ -1,8 +1,5 @@
 #include "pch.h"
 #include "DescriptoHeapsWrapper.h"
-#include "RenderManager.h"
-#include "SwapChainManager.h"
-#include "CommandManager.h"
 
 namespace nam
 {

@@ -1,5 +1,4 @@
 #pragma once
-#include "ContainerSequential.h"
 
 namespace nam
 {

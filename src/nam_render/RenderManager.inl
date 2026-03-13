@@ -1,4 +1,5 @@
-#include "Common/UploadBuffer.h"
+#pragma once
+#include "RenderManager.h"
 
 namespace nam
 {

@@ -1,6 +1,5 @@
 #pragma once
 #define PATH_TEXTURES_FOLDER L"../../res/Textures/"
-#include "Constants.h"
 
 namespace nam
 {

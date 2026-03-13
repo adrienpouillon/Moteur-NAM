@@ -29,10 +29,6 @@
 #include <TextureManager.h>
 #include <ParticleManager.h>
 
-#include <DirectXMath.h>
-#include "Common/MathHelper.h"
-#include <DirectXCollision.h>
-
 //
 //Interne dependence
 

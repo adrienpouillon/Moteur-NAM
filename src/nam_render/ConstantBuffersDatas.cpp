@@ -1,6 +1,5 @@
 #include "pch.h"
 #include "ConstantBuffersDatas.h"
-#include "RenderManager.h"
 
 namespace nam
 {

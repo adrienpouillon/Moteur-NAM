@@ -1,5 +1,4 @@
 #pragma once
-#include <nam_engine/TransformComponent.h>
 
 namespace nam
 {

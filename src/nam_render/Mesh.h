@@ -1,6 +1,4 @@
 #pragma once
-#include "ARenderItem.h"
-#include "CubeFace.h"
 
 namespace nam
 {

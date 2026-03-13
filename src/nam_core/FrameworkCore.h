@@ -22,9 +22,6 @@
 #include <set>
 #include <map>
 
-
-#include <DirectXMath.h>
-
 //Interne dependence
 #include "BaseTypes.h"
 #include "ContainerComposite.h"

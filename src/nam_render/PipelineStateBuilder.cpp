@@ -1,11 +1,5 @@
 #include "pch.h"
 #include "PipelineStateBuilder.h"
-#include "RenderManager.h"
-#include "SwapChainManager.h"
-
-#include "Shader.h"
-#include "RootSignature.h"
-#include "InputLayout.h"
 
 namespace nam
 {

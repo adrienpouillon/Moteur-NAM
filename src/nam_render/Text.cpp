@@ -1,9 +1,6 @@
 #include "pch.h"
 #include "Text.h"
 
-#include "RenderManager.h"
-#include "CommandManager.h"
-
 #include "Constants.h"
 
 namespace nam

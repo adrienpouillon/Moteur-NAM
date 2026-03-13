@@ -1,8 +1,4 @@
 #pragma once
-#include <ContainerSequential.h>
-#include "Light.h"
-#include "Constants.h"
-
 namespace nam
 {
 	class LightManager
