@@ -25,4 +25,3 @@ namespace nam
         std::function<bool(GameObject*)> GetFunctionCondition();
     };
 }
-#include "Condition.inl"

@@ -22,21 +22,33 @@
 #include <set>
 #include <map>
 
+
+#include "DirectXMath.h"
+
 //Interne dependence
+#include "BaseTypes.h"
 #include "ContainerComposite.h"
 #include "ContainerAssociative.h"
 #include "ContainerSequential.h"
 #include "ContainerAdapter.h"
 #include "ContainerHash.h"
-#include "AppChrono.h"
-#include "BaseTypes.h"
+
+#include "Benchmark.h"
 #include "DebugLog.h"
-#include "Timer.h"
 #include "Rng.h"
 
+#include "AppChrono.h"
+#include "Timer.h"
+#include "PerlinNoise.h"
+#include "PointHasher.h"
+#include "PoissonDiscCell.h"
+#include "PoissonDisc.h"
 #include "Condition.h"
 #include "Transition.h"
 #include "Action.h"
+#include "PageIndex.h"
+#include "SparseSetPage.h"
+#include "SparseSet.h"
 
 
 

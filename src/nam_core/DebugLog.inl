@@ -1,7 +1,4 @@
-#include <Windows.h>
 #include <sstream>
-#include <string>
-#include <iostream>
 
 namespace nam
 {

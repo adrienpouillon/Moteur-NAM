@@ -1,5 +1,4 @@
 #pragma once
-#include <vector>
 
 namespace nam
 {
@@ -21,4 +20,3 @@ namespace nam
 		int GetTransitionState() { return m_transitionState; }
 	};
 }
-#include "Transition.inl"

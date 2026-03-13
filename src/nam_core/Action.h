@@ -24,5 +24,3 @@ namespace nam
 		friend class StateMachineComponent;
 	};
 }
-
-#include "Action.inl"

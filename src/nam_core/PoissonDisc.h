@@ -1,7 +1,4 @@
 #pragma once 
-#include "DirectXMath.h"
-#include "PoissonDiscCell.h"
-
 namespace nam
 {
     class PoissonDisc
