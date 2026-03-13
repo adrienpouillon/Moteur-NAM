@@ -1,5 +1,4 @@
 #pragma once
-#include "ISystem.h"
 namespace nam
 {
 	class ParticleSystem : public ISystem

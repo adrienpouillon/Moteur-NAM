@@ -1,5 +1,5 @@
 #pragma once
-#include "ISystem.h"
+
 namespace nam
 {
 	class StateMachineSystem : public ISystem

@@ -1,6 +1,4 @@
 #pragma once
-#include <DirectXMath.h>
-#include "Common/MathHelper.h"
 
 namespace nam
 {

@@ -1,6 +1,5 @@
 #include "pch.h"
 #include "PoissonDisc.h"
-#include "Rng.h"
 
 using namespace DirectX;
 

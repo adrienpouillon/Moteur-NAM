@@ -1,15 +1,6 @@
 #include "pch.h"
 #include "CameraManagerSystem.h"
 
-#include "RenderManager.h"
-
-#include "TransformComponent.h"
-#include "CameraComponent.h"
-
-#include "DataShader.h"
-#include "Entity.h"
-#include "App.h"
-
 namespace nam
 {
 	void CameraManagerSystem::Update(Ecs& ecs)

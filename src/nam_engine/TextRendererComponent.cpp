@@ -1,6 +1,5 @@
 #include "pch.h"
 #include "TextRendererComponent.h"
-#include <RenderManager.h>
 
 namespace nam
 {

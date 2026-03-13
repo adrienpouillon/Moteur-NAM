@@ -1,6 +1,5 @@
 #include "pch.h"
 #include "MeshRendererComponent.h"
-#include <RenderManager.h>
 
 namespace nam
 { 

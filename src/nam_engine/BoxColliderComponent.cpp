@@ -1,7 +1,5 @@
 #include "pch.h"
 #include "BoxColliderComponent.h"
-#include "TransformComponent.h"
-#include "MeshRendererComponent.h"
 
 using namespace DirectX;
 

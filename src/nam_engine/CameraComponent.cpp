@@ -1,7 +1,5 @@
 #include "pch.h"
 #include "CameraComponent.h"
-#include "App.h"
-#include "Window.h"
 
 namespace nam
 {

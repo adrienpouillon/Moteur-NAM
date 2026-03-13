@@ -1,10 +1,4 @@
 #include "pch.h"
-#include "ColliderSystem.h"
-#include "TransformComponent.h"
-#include "MeshRendererComponent.h"
-#include "BoxColliderComponent.h"
-#include "SphereColliderComponent.h"
-#include "PhysicComponent.h"
 
 using namespace DirectX;
 

@@ -1,6 +1,5 @@
 #include "pch.h"
 #include "CaveGenerator.h"
-#include "Rng.h"
 
 using namespace DirectX;
 

@@ -1,9 +1,5 @@
 #pragma once
 #include "Ecs.h"
-#include "ComponentId.h"
-#include "SystemId.h"
-#include "ViewId.h"
-#include "View.h"
 
 namespace nam
 {

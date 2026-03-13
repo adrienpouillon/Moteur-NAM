@@ -1,9 +1,5 @@
 #include "pch.h"
 #include "UISystem.h"
-#include "ButtonComponent.h"
-#include "TransformComponent.h"
-#include "SpriteRendererComponent.h"
-#include "Input.h"
 
 using namespace DirectX;
 

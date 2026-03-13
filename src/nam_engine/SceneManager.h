@@ -1,5 +1,5 @@
 #pragma once
-#include <FrameworkCore.h>
+
 namespace nam
 {
 	class Ecs;

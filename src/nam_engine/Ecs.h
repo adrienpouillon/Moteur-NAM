@@ -1,11 +1,4 @@
 #pragma once
-#include "BaseTypes.h"
-#include "ContainerSequential.h"
-#include "EcsConfig.h"
-#include "EntityManager.h"
-#include "Entity.h"
-
-#include "SparseSet.h"
 
 namespace nam
 {

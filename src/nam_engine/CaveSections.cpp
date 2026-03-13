@@ -1,12 +1,5 @@
 #include "pch.h"
 #include "CaveSections.h"
-#include "MeshRendererComponent.h"
-#include "PerlinNoise.h"
-#include "RenderManager.h"
-#include "Rng.h"
-#include <VoxelGrid.h>
-#include "PoissonDisc.h"
-#include "BoxColliderComponent.h"
 
 using namespace DirectX;
 

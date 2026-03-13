@@ -1,6 +1,5 @@
 #include "pch.h"
 #include "Input.h"
-#include "App.h"
 
 using namespace DirectX;
 

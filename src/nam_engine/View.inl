@@ -1,5 +1,5 @@
-#include "View.h"
 #pragma once
+#include "View.h"
 
 namespace nam
 {

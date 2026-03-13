@@ -23,7 +23,7 @@
 #include <map>
 
 
-#include "DirectXMath.h"
+#include <DirectXMath.h>
 
 //Interne dependence
 #include "BaseTypes.h"
@@ -36,6 +36,8 @@
 #include "Benchmark.h"
 #include "DebugLog.h"
 #include "Rng.h"
+#include "VoxelGrid.h"
+#include "Window.h"
 
 #include "AppChrono.h"
 #include "Timer.h"
@@ -49,6 +51,7 @@
 #include "PageIndex.h"
 #include "SparseSetPage.h"
 #include "SparseSet.h"
+
 
 
 

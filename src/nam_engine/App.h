@@ -1,10 +1,6 @@
 #pragma once
 #include "Ecs.h"
 #include "SceneManager.h"
-#include "Entity.h"
-#include "Window.h"
-
-#include <TextureManager.h>
 
 namespace nam
 {

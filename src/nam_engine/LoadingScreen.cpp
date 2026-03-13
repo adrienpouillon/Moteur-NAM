@@ -1,9 +1,5 @@
 #include "pch.h"
 #include "LoadingScreen.h"
-#include <SpriteRendererComponent.h>
-
-#include "RenderManager.h"
-#include <limits>
 
 namespace nam
 {

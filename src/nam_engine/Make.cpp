@@ -1,8 +1,6 @@
 #include "pch.h"
 #include "Make.h"
 
-#include <RenderManager.h>
-
 namespace nam
 {
 	App* Make::msp_app = nullptr;

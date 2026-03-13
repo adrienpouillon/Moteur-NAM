@@ -1,6 +1,4 @@
 #pragma once
-#include "IView.h"
-#include "ContainerComposite.h"
 
 namespace nam
 {

@@ -1,5 +1,4 @@
 #pragma once
-#include <Sprite.h>
 
 namespace nam
 {

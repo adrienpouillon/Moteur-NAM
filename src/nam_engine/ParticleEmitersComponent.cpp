@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "ParticleEmitersComponent.h"
+
 namespace nam
 {
     void ParticleEmitersComponent::AddEmiter(DirectX::XMFLOAT3 maxXYZ, DirectX::XMFLOAT3 minXYZ, DirectX::XMFLOAT3 maxDir, DirectX::XMFLOAT3 minDir, DirectX::XMFLOAT3 startColor, DirectX::XMFLOAT3 endColor, float maxSpeed, float minSpeed, float lifeTime, float spawnRate)

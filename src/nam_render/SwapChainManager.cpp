@@ -2,7 +2,6 @@
 #include "SwapChainManager.h"
 #include "RenderManager.h"
 #include "CommandManager.h"
-#include "../nam_engine/App.h"
 
 namespace nam
 {

@@ -1,6 +1,5 @@
 #include "pch.h"
 #include "SpatialHash.h"
-#include "PointHasher.h"
 
 using namespace DirectX;
 

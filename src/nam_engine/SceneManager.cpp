@@ -1,6 +1,5 @@
 #include "pch.h"
 #include "SceneManager.h"
-#include "App.h"
 
 namespace nam
 {

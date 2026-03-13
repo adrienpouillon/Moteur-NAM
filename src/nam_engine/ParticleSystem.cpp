@@ -1,10 +1,5 @@
 #include "pch.h"
 #include "ParticleSystem.h"
-#include "ParticleEmitersComponent.h"
-#include "Rng.h"
-#include <DataShader.h>
-#include <RenderManager.h>
-#include <ParticleManager.h>
 
 using namespace DirectX;
 

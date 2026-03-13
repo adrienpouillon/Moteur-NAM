@@ -1,9 +1,5 @@
 #include "pch.h"
 #include "PhysicSystem.h"
-#include "TransformComponent.h"
-#include "PhysicComponent.h"
-#include "App.h"
-#include "DebugLog.h"
 
 using namespace DirectX;
 

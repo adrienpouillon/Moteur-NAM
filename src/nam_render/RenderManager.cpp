@@ -4,8 +4,6 @@
 #include "CommandManager.h"
 #include "RenderWrapper.h"
 
-#include "../nam_engine/App.h"
-
 #include "Common/DDSTextureLoader.h"
 
 #include "Mesh.h"

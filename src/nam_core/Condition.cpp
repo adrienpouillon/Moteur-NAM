@@ -5,7 +5,7 @@ namespace nam
 {
 	Condition::Condition()
 	{
-
+		m_expected = true;
 	}
 
 	bool Condition::Test(GameObject* owner)

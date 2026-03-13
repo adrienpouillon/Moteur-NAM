@@ -1,7 +1,4 @@
 #pragma once
-#include "ISystem.h"
-#include "CollisionInfo.h"
-#include "SpatialHash.h"
 
 struct DirectX::BoundingOrientedBox;
 

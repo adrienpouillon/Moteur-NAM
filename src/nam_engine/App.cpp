@@ -1,25 +1,5 @@
 #include "pch.h"
 #include "App.h"
-#include <RenderManager.h>
-
-#include "RenderSystem.h"
-#include "PhysicSystem.h"
-#include "ColliderSystem.h"
-#include "ParticleSystem.h"
-#include "UISystem.h"
-#include "BehaviorSystem.h"
-#include "LightManagerSystem.h"
-
-#include "CameraManagerSystem.h"
-#include "CameraComponent.h"
-
-#include "Window.h"
-
-#include <Mesh.h>
-#include <Sprite.h>
-#include <Text.h>
-
-#include "LoadingScreen.h"
 
 using namespace DirectX;
 

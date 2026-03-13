@@ -1,6 +1,5 @@
 #include "pch.h"
 #include "PerlinNoise.h"
-#include "Rng.h"
 
 using namespace DirectX;
 

@@ -1,6 +1,5 @@
 #include "pch.h"
 #include "SpriteRendererComponent.h"
-#include <RenderManager.h>
 
 namespace nam
 {

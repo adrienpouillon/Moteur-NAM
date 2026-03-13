@@ -1,5 +1,4 @@
 #pragma once
-#include <Light.h>
 
 namespace nam
 {

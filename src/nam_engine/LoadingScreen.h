@@ -1,7 +1,4 @@
 #pragma once
-#include "GameObject.h"
-#include <BaseTypes.h>
-#include <Timer.h>
 
 namespace nam
 {

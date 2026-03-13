@@ -1,14 +1,6 @@
 #include "pch.h"
 #include "LightManagerSystem.h"
 
-#include "LightComponent.h"
-#include "TransformComponent.h"
-
-#include "Ecs.h"
-
-#include <RenderManager.h>
-#include <DataShader.h>
-
 namespace nam
 {
 	void LightManagerSystem::Update(Ecs& ecs)

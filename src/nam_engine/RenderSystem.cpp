@@ -1,18 +1,6 @@
 #include "pch.h"
 #include "RenderSystem.h"
 
-#include "MeshRendererComponent.h"
-#include "SpriteRendererComponent.h"
-#include "TextRendererComponent.h"
-
-#include "TransformComponent.h"
-
-#include "DataShader.h"
-#include "RenderManager.h"
-#include "App.h"
-
-#include <nam_core/ContainerAssociative.h>
-
 namespace nam
 {
 	struct Render2DItemData

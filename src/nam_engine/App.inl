@@ -1,6 +1,5 @@
 #pragma once
 #include "App.h"
-#include "Scene.h"
 namespace nam
 {
 	/*template<typename T>

@@ -1,6 +1,5 @@
 #include "pch.h"
 #include "BehaviorSystem.h"
-#include "BehaviorComponent.h"
 
 namespace nam
 {

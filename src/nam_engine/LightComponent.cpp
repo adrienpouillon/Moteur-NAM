@@ -1,9 +1,6 @@
 #include "pch.h"
 #include "LightComponent.h"
 
-#include <LightManager.h>
-#include <RenderManager.h>
-
 namespace nam
 {
 	Light* LightComponent::CreateLightInstance()
