@@ -1,6 +1,5 @@
 #include "pch.h"
 #include "RootSignature.h"
-#include "RenderManager.h"
 
 namespace nam
 {

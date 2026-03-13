@@ -1,8 +1,5 @@
 #include "pch.h"
 #include "RenderItemManager.h"
-#include "Mesh.h"
-#include "Sprite.h"
-#include "Text.h"
 
 namespace nam
 {

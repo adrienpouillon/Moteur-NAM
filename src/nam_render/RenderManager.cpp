@@ -1,16 +1,5 @@
 #include "pch.h"
 #include "RenderManager.h"
-#include "SwapchainManager.h"
-#include "CommandManager.h"
-#include "RenderWrapper.h"
-
-#include "Common/DDSTextureLoader.h"
-
-#include "Mesh.h"
-#include "Window.h"
-#include "PipelineStateBuilder.h"
-
-#include "ParticleManager.h"
 
 namespace nam
 {

@@ -19,15 +19,10 @@
 #include <bitset>
 #include <limits>
 #include <chrono>
-#include <limits>
 #include <windows.h>
 #include <optional>
 #include <FrameworkCore.h>
 #include <FrameworkRender.h>
-
-#include <RenderManager.h>
-#include <TextureManager.h>
-#include <ParticleManager.h>
 
 //
 //Interne dependence

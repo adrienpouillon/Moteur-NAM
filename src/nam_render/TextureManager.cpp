@@ -1,7 +1,5 @@
 #include "pch.h"
 #include "TextureManager.h"
-#include "RenderManager.h"
-#include "CommandManager.h"
 
 namespace nam
 {

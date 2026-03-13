@@ -1,8 +1,6 @@
 #include "pch.h"
 #include "Text.h"
 
-#include "Constants.h"
-
 namespace nam
 {
 	Text::Text()

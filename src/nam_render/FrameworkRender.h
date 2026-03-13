@@ -14,6 +14,8 @@
 #include <string>
 #include <chrono>
 #include <wrl.h>
+#include <comdef.h>
+#include <fstream>
 
 #include <windows.h>
 #include <d3dcommon.h>

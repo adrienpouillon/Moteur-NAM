@@ -1,13 +1,5 @@
 #include "pch.h"
 #include "Mesh.h"
-#include "RenderManager.h"
-#include "CommandManager.h"
-#include "PerlinNoise.h"
-#include "Common/DDSTextureLoader.h"
-#include "VoxelGrid.h"
-#include <PointHasher.h>
-
-#include "ObjParser.h"
 
 namespace nam
 {
