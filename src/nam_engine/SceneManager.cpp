@@ -118,22 +118,6 @@ namespace nam
 		AddCurrentScene(sceneTag2);
 	}
 
-	Scene* SceneManager::CreateScene(size sceneTag)
-	{
-		Scene* scene = new Scene();
-		scene->SetId(m_idNext);
-		scene->SetEcs(mp_ecs);
-		scene->SetAllGameObjectInAllScene(&m_allGameObjectInAllScene);
-		scene->m_tag = sceneTag;
-		IncreaseIdNext();
-
-		m_allScene[scene->GetId()] = scene;
-		m_allSceneByTag[sceneTag] = scene;
-
-		SetActiveScene(scene, false);
-		return scene;
-	}
-
 	void SceneManager::DestroyScene(Scene* scene)
 	{
 		u32 id = scene->GetId();
@@ -143,6 +127,16 @@ namespace nam
 		}
 		m_allScene.erase(id);
 		delete scene;
+	}
+
+	void SceneManager::DestroyScene(u32 idScene)
+	{
+		DestroyScene(GetScene(idScene));
+	}
+
+	void SceneManager::DestroyScene(size sceneTag)
+	{
+		DestroyScene(GetSceneByTag(sceneTag));
 	}
 
 //private
@@ -155,10 +149,26 @@ namespace nam
 	void SceneManager::SetActiveScene(u32 idScene, bool active)
 	{
 		Scene* scene = GetScene(idScene);
-		_ASSERT(scene && "ActiveScene() : idScene a ete invalide");
 		if (scene != nullptr)
 		{
 			scene->SetIsActive(active);
+		}
+		else
+		{
+			_ASSERT(scene != nullptr && "ActiveScene() : idScene a ete invalide");
+		}
+	}
+
+	void SceneManager::SetActiveScene(size sceneTag, bool active)
+	{
+		Scene* scene = GetSceneByTag(sceneTag);
+		if (scene != nullptr)
+		{
+			scene->SetIsActive(active);
+		}
+		else
+		{
+			_ASSERT(scene != nullptr && "ActiveScene() : sceneTag a ete invalide");
 		}
 	}
 
@@ -253,7 +263,7 @@ namespace nam
 
 	SceneManager::~SceneManager()
 	{
-		Destroy();
+
 	}
 }
 

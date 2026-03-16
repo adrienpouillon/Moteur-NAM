@@ -35,8 +35,7 @@ namespace nam
 
 	App::~App()
 	{
-		mp_camera->Destroy();
-		delete mp_camera;
+		DestroyCamera();
 		m_sceneManager.Destroy();
 		delete m_make;
 
@@ -89,7 +88,7 @@ namespace nam
 		StartCamera();
 
 		//Loading Screen first frame
-		Scene* p_loadingScene = m_sceneManager.CreateScene(size(-1));
+		Scene* p_loadingScene = m_sceneManager.CreateScene<Scene>(size(-1));
 		mp_loadingScreen = p_loadingScene->CreateGameObject<LoadingScreen>();
 		p_loadingScene->Start();
 		Make::AddCurrentScene(p_loadingScene);
@@ -112,6 +111,7 @@ namespace nam
 	{
 		Start();
 		MainLoop();
+		Destroy();
 	}
 
 	void App::LoadTexture(std::wstring path, size uniqueTag, bool usingTextureFolder)
@@ -181,7 +181,7 @@ namespace nam
 		mp_camera = new GameObject();
 		mp_camera->m_entity = m_ecs.CreateEntity();
 		mp_camera->mp_scene = nullptr;
-
+		mp_camera->SetSingle(true);
 		mp_camera->SetupTransform(XMFLOAT3(0.f, 0.f, 0.f));
 
 		mp_camera->Start();
@@ -190,6 +190,13 @@ namespace nam
 	void App::StartCamera()
 	{
 		mp_camera->AddComponent(CameraComponent());
+	}
+
+	void App::DestroyCamera()
+	{
+		mp_camera->OnDestroy();
+		m_ecs.DestroyEntity(*mp_camera->GetEntity());
+		delete mp_camera;
 	}
 
 	void App::CameraDefaultSettings()
@@ -247,6 +254,16 @@ namespace nam
 		m_sceneManager.GetScene(idScene)->DestroyGameObject(gameObject);
 	}
 
+	void App::DestroyGameObjectIsSingle(GameObject* gameObject, Scene* scene, bool isSingleGameObject)
+	{
+		scene->DestroyGameObjectIsSingle(gameObject, isSingleGameObject);
+	}
+
+	void App::DestroyGameObjectIsSingle(GameObject* gameObject, u32 idScene, bool isSingleGameObject)
+	{
+		m_sceneManager.GetScene(idScene)->DestroyGameObjectIsSingle(gameObject, isSingleGameObject);
+	}
+
 	void App::SetActiveGameObject(Scene* scene, GameObject* gameObject, bool active)
 	{
 		scene->SetActiveEntity(*gameObject->GetEntity(), active);
@@ -295,11 +312,6 @@ namespace nam
 	GameObject* App::GetGameObject(const Entity& entity)
 	{
 		return m_sceneManager.GetGameObjectInGame(entity);
-	}
-
-	Scene* App::CreateScene(size sceneTag)
-	{
-		return m_sceneManager.CreateScene(sceneTag);
 	}
 
 	void App::DestroyScene(Scene* scene)

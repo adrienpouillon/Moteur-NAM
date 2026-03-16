@@ -29,10 +29,12 @@ namespace nam
 			}
 			m_allGameObject.clear();
 		}
+		OnInit();
 	}
 
 	void Scene::Start()
 	{
+		OnStart();
 		for (auto it = m_allGameObject.begin(); it != m_allGameObject.end(); it++)
 		{
 			it->second->Start();
@@ -47,10 +49,12 @@ namespace nam
 			{
 				GameObject* gameObject = it->second;
 				int idEntity = gameObject->GetEntity()->m_id;
-				gameObject->Destroy();
-				m_allGameObject.erase(idEntity);
-				mp_allGameObjectInAllScene->erase(idEntity);
-				delete gameObject;
+				if (gameObject->Destroy(gameObject->GetSingle()))
+				{
+					m_allGameObject.erase(idEntity);
+					mp_allGameObjectInAllScene->erase(idEntity);
+					delete gameObject;
+				}
 			}
 			m_allGameObjectToDestroy.clear();
 		}
@@ -58,8 +62,25 @@ namespace nam
 
 	void Scene::Destroy()
 	{
-		DestroyAllGameObject();
+		OnDestroy();
+		DestroyAllGameObjectIsSingle(false);
 		m_allEntityActiveFalse.clear();
+		SetActiveAllEntity(false);
+	}
+
+	void Scene::OnInit()
+	{
+		
+	}
+
+	void Scene::OnStart()
+	{
+		
+	}
+
+	void Scene::OnDestroy()
+	{
+
 	}
 
 	void Scene::ResetScene()
@@ -70,6 +91,27 @@ namespace nam
 
 	void Scene::DestroyGameObject(GameObject* gameObject)
 	{
+		if (gameObject->GetSingle() == true)
+		{
+			return;
+		}
+
+		u32 idEntity = gameObject->GetEntity()->m_id;
+		auto it = m_allGameObjectToDestroy.find(idEntity);
+		if (it == m_allGameObjectToDestroy.end())
+		{
+			m_allGameObjectToDestroy[idEntity] = gameObject;
+		}
+
+	}
+
+	void Scene::DestroyGameObjectIsSingle(GameObject* gameObject, bool isSingleGameObject)
+	{
+		if (gameObject->GetSingle() != isSingleGameObject)
+		{
+			return;
+		}
+
 		u32 idEntity = gameObject->GetEntity()->m_id;
 		auto it = m_allGameObjectToDestroy.find(idEntity);
 		if (it == m_allGameObjectToDestroy.end())
@@ -114,11 +156,11 @@ namespace nam
 		mp_ecs->DestroyEntity(entity);
 	}
 
-	void Scene::DestroyAllGameObject()
+	void Scene::DestroyAllGameObjectIsSingle(bool isSingle)
 	{
 		for (auto it = m_allGameObject.begin(); it != m_allGameObject.end(); it++)
 		{
-			DestroyGameObject(it->second);
+			DestroyGameObjectIsSingle(it->second, isSingle);
 		}
 	}
 
@@ -137,7 +179,7 @@ namespace nam
 
 //public
 
-	const Entity Scene::GetEntity(uint32_t idEntity)
+	const Entity Scene::GetEntity(u32 idEntity)
 	{;
 		auto it = m_allGameObject.find(idEntity);
 		if (it != m_allGameObject.end())
@@ -153,7 +195,7 @@ namespace nam
 		return nullptr;
 	}
 
-	GameObject* Scene::GetGameObject(uint32_t idEntity)
+	GameObject* Scene::GetGameObject(u32 idEntity)
 	{
 		auto it = m_allGameObject.find(idEntity);
 		if (it != m_allGameObject.end())
@@ -198,8 +240,8 @@ namespace nam
 
 	Scene::~Scene()
 	{
-		SetActiveAllEntity(false);
 		Destroy();
+		DestroyAllGameObjectIsSingle(true);
 	}
 
 	

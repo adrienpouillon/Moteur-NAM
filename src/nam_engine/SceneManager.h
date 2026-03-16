@@ -17,7 +17,7 @@ namespace nam
 		UnMap<size, Scene*> m_allSceneByTag;
 
 		UnMap<u32, GameObject*> m_allGameObjectInAllScene;
-		uint32_t m_idNext;
+		u32 m_idNext;
 	public:
 
 		SceneManager();
@@ -41,13 +41,17 @@ namespace nam
 		void SwitchCurrentScene(u32 idSceneClose, u32 idSceneOpen);
 		void SwitchCurrentScene(size sceneTag1, size sceneTag2);
 
-		Scene* CreateScene(size sceneTag);
+		template<typename T>
+		T* CreateScene(size sceneTag);
 		void DestroyScene(Scene* scene);
+		void DestroyScene(u32 idScene);
+		void DestroyScene(size sceneTag);
 
 	private:
 
 		void SetActiveScene(Scene* scene, bool active);
 		void SetActiveScene(u32 idScene, bool active);
+		void SetActiveScene(size sceneTag, bool active);
 
 		void SetActiveAllScene(bool active);
 
@@ -78,3 +82,4 @@ namespace nam
 	};
 }
 
+#include "SceneManager.inl"

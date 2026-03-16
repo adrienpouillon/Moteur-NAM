@@ -12,8 +12,10 @@ namespace nam
 		static SceneManager* msp_sceneManager;
 		static AppChrono* msp_appChrono;
 	public:
+		//for clean and replace static value
+		static void RefreshValue();
 
-		App* GetApp();
+		static App* GetApp();
 
 		template<typename Component>
 		static void AddComponent(const Entity& entity, const Component& data);
@@ -42,6 +44,8 @@ namespace nam
 		static T* CreateGameObject(u32 idScene);
 		static void DestroyGameObject(GameObject* gameObject, Scene* scene);
 		static void DestroyGameObject(GameObject* gameObject, u32 idScene);
+		static void DestroyGameObjectIsSingle(GameObject* gameObject, Scene* scene, bool isSingleGameObject);
+		static void DestroyGameObjectIsSingle(GameObject* gameObject, u32 idScene, bool isSingleGameObject);
 		static void SetActiveGameObject(Scene* scene, GameObject* gameObject, bool active);
 		static void SetActiveGameObject(u32 idScene, GameObject* gameObject, bool active);
 		static void SetActiveEntity(Scene* scene, const Entity& entity, bool active);
@@ -53,7 +57,8 @@ namespace nam
 		static GameObject* GetGameObject(u32 idEntity);
 		static GameObject* GetGameObject(const Entity& entity);
 
-		static Scene* CreateScene(size sceneTag);
+		template<typename T>
+		static T* CreateScene(size sceneTag);
 		static void DestroyScene(Scene* scene);
 		static void AddCurrentScene(u32 idScene);
 		static void AddCurrentScene(Scene* scene);

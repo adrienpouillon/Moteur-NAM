@@ -14,6 +14,8 @@ namespace nam
 		mp_transform = nullptr;
 		m_stateMachine = nullptr;
 
+		m_isSingleGameObject = false;
+
 		m_canDeleteMesh = false;
 		m_canDeleteSprite = false;
 		m_canDeleteText = false;
@@ -65,8 +67,13 @@ namespace nam
 	}
 
 //private
-	void GameObject::Destroy()
+	bool GameObject::Destroy(bool isSingleGameObject)
 	{
+		if (m_isSingleGameObject != isSingleGameObject)
+		{
+			return false;
+		}
+
 		OnDestroy();
 
 		if (m_canDeleteMesh && HasComponent<MeshRendererComponent>())
@@ -91,6 +98,7 @@ namespace nam
 		}
 
 		mp_scene->DestroyEntity(m_entity);
+		return true;
 	}
 //public
 
@@ -147,6 +155,11 @@ namespace nam
 	void GameObject::DestroyGameObject()
 	{
 		mp_scene->DestroyGameObject(this);
+	}
+
+	void GameObject::DestroyGameObjectIsSingle(bool isSingleGameObject)
+	{
+		mp_scene->DestroyGameObjectIsSingle(this, isSingleGameObject);
 	}
 
 	void GameObject::SetWorldPosition(const XMFLOAT3& position)
@@ -587,6 +600,16 @@ namespace nam
 	int GameObject::GetTag() const
 	{
 		return m_tag;
+	}
+
+	void GameObject::SetSingle(bool isSingleGameObject)
+	{
+		m_isSingleGameObject = isSingleGameObject;
+	}
+
+	bool GameObject::GetSingle()
+	{
+		return m_isSingleGameObject;
 	}
 
 	TransformComponent* GameObject::GetTransform()

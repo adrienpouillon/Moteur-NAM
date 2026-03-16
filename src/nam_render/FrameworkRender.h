@@ -1,10 +1,5 @@
 #pragma once
 
-//lib
-
-//#pragma comment(lib, "../../ide/???/x64/Debug/???.lib")
-//#include "../???/framework???.h"
-
 //
 //Externe dependence
 #include <iostream>
@@ -23,7 +18,6 @@
 #include <DirectXMath.h>
 #include <DirectXCollision.h>
 
-
 #pragma comment(lib,"d3dcompiler.lib")
 #pragma comment(lib, "D3D12.lib")
 #pragma comment(lib, "dxgi.lib")
@@ -39,8 +33,6 @@
 
 using namespace DirectX;
 using Microsoft::WRL::ComPtr;
-
-
 
 #include "Light.h"
 #include "LightManager.h"
@@ -67,7 +59,6 @@ using Microsoft::WRL::ComPtr;
 #include "RenderWrapper.h"
 #include "ARenderItem.h"
 #include "SwapChainManager.h"
-
 
 #include "Mesh.h"
 #include "Sprite.h"

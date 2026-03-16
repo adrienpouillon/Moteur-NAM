@@ -16,11 +16,13 @@ namespace nam
 
     Ecs::~Ecs()
     {
-        for (u32 i = 0; i < ComponentId::GetCurrentLast(); ++i) {
+        u32 lenghtComponent = ComponentId::GetCurrentLast();
+        for (u32 i = 0; i < lenghtComponent; ++i) {
             delete m_components[i];
         }
 
-        for (u32 i = 0; i < SystemId::GetCurrentLast(); ++i) {
+        u32 lenghtSystem = SystemId::GetCurrentLast();
+        for (u32 i = 0; i < lenghtSystem; ++i) {
             ISystem* p_system = m_systems[i];
             p_system->Destroy();
             delete p_system;

@@ -64,6 +64,7 @@ namespace nam
 	private:
 		void CreateCamera();
 		void StartCamera();
+		void DestroyCamera();
 		void CameraDefaultSettings(); 
 
 		void ToggleDebugConsole(bool state);
@@ -96,6 +97,8 @@ namespace nam
 		T* CreateGameObject(u32 idScene);
 		void DestroyGameObject(GameObject* gameObject, Scene* scene);
 		void DestroyGameObject(GameObject* gameObject, u32 idScene);
+		void DestroyGameObjectIsSingle(GameObject* gameObject, Scene* scene, bool isSingleGameObject);
+		void DestroyGameObjectIsSingle(GameObject* gameObject, u32 idScene, bool isSingleGameObject);
 		void SetActiveGameObject(Scene* scene, GameObject* gameObject, bool active);
 		void SetActiveGameObject(u32 idScene, GameObject* gameObject, bool active);
 		void SetActiveEntity(Scene* scene, const Entity& entity, bool active);
@@ -107,7 +110,8 @@ namespace nam
 		GameObject* GetGameObject(u32 idEntity);
 		GameObject* GetGameObject(const Entity& entity);
 
-		Scene* CreateScene(size sceneTag);
+		template<typename T>
+		T* CreateScene(size sceneTag);
 		void DestroyScene(Scene* scene);
 		void AddCurrentScene(u32 idScene);
 		void AddCurrentScene(Scene* scene);
@@ -163,7 +167,7 @@ namespace nam
 
 		friend class GameObject;
 		friend class Make;
-	};
+};
 }
 
 #include "App.inl"

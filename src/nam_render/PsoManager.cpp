@@ -86,10 +86,10 @@ namespace nam
 			delete inputLayout;
 		}
 
-		for (auto& [key, shader] : m_shaders)
-		{
-			delete shader;
-		}
+		//for (auto& [key, shader] : m_shaders)
+		//{
+		//	delete shader;
+		//}
 
 		m_shaders.clear();
 		m_inputLayouts.clear();

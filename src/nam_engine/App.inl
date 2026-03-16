@@ -14,6 +14,12 @@ namespace nam
 		return m_sceneManager.GetScene(idScene)->CreateGameObject<T>();
 	}
 
+	template<typename T>
+	T* App::CreateScene(size sceneTag)
+	{
+		return m_sceneManager.CreateScene<T>(sceneTag);
+	}
+
 	template<typename Component>
 	void App::AddComponent(const Entity& entity, const Component& data)
 	{

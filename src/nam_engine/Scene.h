@@ -16,22 +16,22 @@ namespace nam
 		UnMap<u32, Entity> m_allEntityActiveFalse;
 		UnMap<u32, GameObject*>* mp_allGameObjectInAllScene;
 		UnMap<u32, GameObject*> m_allGameObjectToDestroy;
-		uint32_t m_id;
+		u32 m_id;
 		bool m_isActive;
 
 		size m_tag = -1;
-	private:
+	protected:
 		Scene();
 
 	public:
-
-		virtual void Init();
-
-		virtual void Start();
-
+		void Init();
+		void Start();
 		virtual void CleanUpdate();
+		void Destroy();
 
-		virtual void Destroy();
+		virtual void OnInit();
+		virtual void OnStart();
+		virtual void OnDestroy();
 
 		void ResetScene();
 
@@ -39,6 +39,7 @@ namespace nam
 		T* CreateGameObject();
 
 		void DestroyGameObject(GameObject* gameObject);
+		void DestroyGameObjectIsSingle(GameObject* gameObject, bool isSingleGameObject);
 
 		void SetActiveEntity(const Entity& entity, bool active);
 
@@ -47,15 +48,15 @@ namespace nam
 	protected:
 
 		void DestroyEntity(const Entity& entity);
-		void DestroyAllGameObject();
+		void DestroyAllGameObjectIsSingle(bool isSingle);
 
 		void SetAllGameObjectInAllScene(UnMap<u32, GameObject*>* allGameObjectInAllScene);
 
 	public:
 
-		const Entity GetEntity(uint32_t idEntity);
+		const Entity GetEntity(u32 idEntity);
 		GameObject* GetGameObject(const Entity& entity);
-		GameObject* GetGameObject(uint32_t idEntity);
+		GameObject* GetGameObject(u32 idEntity);
 
 		const UnMap<u32, GameObject*>& GetAllGameObject() const;
 

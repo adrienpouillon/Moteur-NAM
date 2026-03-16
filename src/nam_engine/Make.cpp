@@ -23,6 +23,11 @@ namespace nam
 		return msp_app;
 	}
 
+	void Make::RefreshValue()
+	{
+		SetApp(App::Get());
+	}
+
 	void Make::SetApp(App* app)
 	{
 		if (app != nullptr)
@@ -49,6 +54,16 @@ namespace nam
 	void Make::DestroyGameObject(GameObject* gameObject, u32 idScene)
 	{
 		msp_sceneManager->GetScene(idScene)->DestroyGameObject(gameObject);
+	}
+
+	void Make::DestroyGameObjectIsSingle(GameObject* gameObject, Scene* scene, bool isSingleGameObject)
+	{
+		scene->DestroyGameObjectIsSingle(gameObject, isSingleGameObject);
+	}
+
+	void Make::DestroyGameObjectIsSingle(GameObject* gameObject, u32 idScene, bool isSingleGameObject)
+	{
+		msp_sceneManager->GetScene(idScene)->DestroyGameObjectIsSingle(gameObject, isSingleGameObject);
 	}
 
 	void Make::SetActiveGameObject(Scene* scene, GameObject* gameObject, bool active)
@@ -99,11 +114,6 @@ namespace nam
 	GameObject* Make::GetGameObject(const Entity& entity)
 	{
 		return msp_sceneManager->GetGameObjectInGame(entity);
-	}
-
-	Scene* Make::CreateScene(size sceneTag)
-	{
-		return msp_sceneManager->CreateScene(sceneTag);
 	}
 
 	void Make::DestroyScene(Scene* scene)

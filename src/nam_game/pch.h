@@ -16,5 +16,8 @@ using namespace DirectX;
 #include "Enemy.h"
 #include "Player.h"
 
+#include "UiScene.h"
+#include "GameScene.h"
+
 
 #endif

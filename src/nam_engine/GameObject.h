@@ -12,6 +12,7 @@ namespace nam
 		Scene* mp_scene;
 		int m_tag;
 		TransformComponent* mp_transform;
+		bool m_isSingleGameObject;
 		bool m_canDeleteMesh;
 		bool m_canDeleteSprite;
 		bool m_canDeleteText;
@@ -40,6 +41,7 @@ namespace nam
 
 		void SetActiveEntity(bool active);
 		void DestroyGameObject();
+		void DestroyGameObjectIsSingle(bool isSingleGameObject);
 
 		template<typename Component>
 		void AddComponent(const Component& data);
@@ -133,13 +135,16 @@ namespace nam
 		void SetTag(int tag);
 		bool IsTag(int tag) const;
 		int GetTag() const;
+
+		void SetSingle(bool isSingleGameObject);
+		bool GetSingle();
 		
 		TransformComponent* GetTransform();
 
 
 
 	private:
-		void Destroy();
+		bool Destroy(bool isSingleGameObject);
 
 		template<typename T>
 		void SetupFunctionUpdate(T* owner, void (T::* Update)());
