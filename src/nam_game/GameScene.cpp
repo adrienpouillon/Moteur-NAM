@@ -59,7 +59,6 @@ void GameScene::GenerateGameObject()
 		enemy->SetWorldPosition(pos);
 		enemy->SetupMesh(mesh);
 		enemy->SetupLight(light);
-		enemy->SetSingle(true);
 	}
 
 	//creation enemy
@@ -75,7 +74,6 @@ void GameScene::GenerateGameObject()
 		enemy2->SetupSphereCollider();
 		enemy2->SetWorldPosition(pos);
 		enemy2->SetupMesh(mesh);
-		enemy2->SetSingle(false);
 	}
 
 	//creation floor

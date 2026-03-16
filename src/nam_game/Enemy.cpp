@@ -57,8 +57,6 @@ void Enemy::OnUpdate()
 		TranslateWorld(translation);
 	}
 
-	DestroyGameObject();
-
 	/*GameObject* gameObjectParticleEmitter = GetParticleEmitter();
 	ParticleEmitersComponent& particleEmiters = gameObjectParticleEmitter->GetComponent<ParticleEmitersComponent>();
 	particleEmiters.m_maxXYZ[INDEX_PARTICLE_PlAYER] = XMFLOAT3(posPlayer.x + OFFSET_CENTER_PARTICLE, posPlayer.y + OFFSET_CENTER_PARTICLE, posPlayer.z + OFFSET_CENTER_PARTICLE);

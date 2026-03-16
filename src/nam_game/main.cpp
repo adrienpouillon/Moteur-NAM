@@ -35,4 +35,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR cmdLine, i
 
 	//lancer le jeu
 	app->Run();	
+
+	return 0;
 }
