@@ -11,6 +11,8 @@ using namespace DirectX;
 
 #include "Tag.h"
 
+#include "LifeComponentSystem.h"
+
 #include "Camera.h"
 #include "Score.h"
 #include "Enemy.h"

@@ -129,6 +129,9 @@ namespace nam
 
 		void SetupPhysic(const DirectX::XMFLOAT3& velocity, bool useGravity, float masse = 1.f);
 
+		template<typename T>
+		T& SetupCustom();
+
 		Entity* GetEntity();
 		Scene* GetScene();
 

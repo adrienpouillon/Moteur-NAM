@@ -22,6 +22,21 @@ namespace nam
 	}
 
 	template<typename T>
+	inline T& GameObject::SetupCustom()
+	{
+		if (HasComponent<T>() == false)
+		{
+			T comp;
+			AddComponent(comp);
+			return GetComponent<T>();
+		}
+		else
+		{
+			return GetComponent<T>();
+		}
+	}
+
+	template<typename T>
 	inline void GameObject::SetupFunctionUpdate(T* owner, void(T::* Update)())
 	{
 		if (HasComponent<BehaviorComponent>() == false)

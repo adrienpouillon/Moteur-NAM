@@ -14,7 +14,7 @@ void Enemy::OnInit()
 
 void Enemy::OnStart()
 {
-
+	
 }
 
 void Enemy::OnUpdate()
@@ -55,6 +55,12 @@ void Enemy::OnUpdate()
 	{
 		XMFLOAT3 translation = { 0, -speed, 0 };
 		TranslateWorld(translation);
+	}
+
+	if (HasComponent<LifeComponent>())
+	{
+		LifeComponent& lifeComponent = GetComponent<LifeComponent>();
+		lifeComponent.m_life--;
 	}
 
 	/*GameObject* gameObjectParticleEmitter = GetParticleEmitter();

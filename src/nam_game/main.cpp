@@ -2,12 +2,14 @@
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR cmdLine, int cmdShow)
 {
-    App* app = App::Get(hInstance, 1920, 1080);
+	int width = 1920;
+	int height = 1080;
+    App* app = App::Get(hInstance, width, height);
 
 	//start game
 	{
 		//system
-		//Make::AddSystem<...>();
+		Make::AddSystem<LifeSystem>();
 
 		Make::LoadTexture(L"yellow.dds", (size)Textures::_Yellow, true);
 		Make::LoadTexture(L"rainbow.dds", (size)Textures::_Rainbow, true);

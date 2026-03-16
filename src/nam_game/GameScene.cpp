@@ -59,6 +59,9 @@ void GameScene::GenerateGameObject()
 		enemy->SetWorldPosition(pos);
 		enemy->SetupMesh(mesh);
 		enemy->SetupLight(light);
+
+		LifeComponent& lifeComponent = enemy->SetupCustom<LifeComponent>();
+		lifeComponent.m_life = 162;
 	}
 
 	//creation enemy
@@ -74,6 +77,9 @@ void GameScene::GenerateGameObject()
 		enemy2->SetupSphereCollider();
 		enemy2->SetWorldPosition(pos);
 		enemy2->SetupMesh(mesh);
+
+		LifeComponent& lifeComponent = enemy2->SetupCustom<LifeComponent>();
+		lifeComponent.m_life = 233;
 	}
 
 	//creation floor
